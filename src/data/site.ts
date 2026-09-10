@@ -3,7 +3,7 @@ export const SITE = {
   url: 'https://alanestate.com',
   tagline: 'A clear path through what comes next.',
   description:
-    'A free, step-by-step guide to what to do when someone dies in Australia — personalised to your state, the will, super and SMSF — from the people building Alan Estate.',
+    'A free, step-by-step guide to what to do when someone dies in Australia, personalised to your state, the will, superannuation and any self-managed super fund.',
   email: 'hello@alanestate.com',
   /** FormSubmit alias (hides the destination mailbox). Submissions arrive by email. */
   formEndpoint: 'https://formsubmit.co/630b17bffdccfbe1098db5acc284a769',

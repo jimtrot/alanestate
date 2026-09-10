@@ -43,6 +43,13 @@ const fullTitle = title === SITE.name ? `${SITE.name} — ${SITE.tagline}` : `${
     {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
   </head>
   <body class="min-h-dvh flex flex-col">
+    <script is:inline>
+      // Lightweight, cookie-free event stub. Replace the body with a real analytics
+      // call (e.g. Plausible or Cloudflare Web Analytics) when one is added.
+      window.__aeTrack = function (name, props) {
+        try { (window.plausible || function () {})(name, { props: props || {} }); } catch (e) {}
+      };
+    </script>
     <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 btn btn-primary">Skip to content</a>
     <Header />
     <main id="main" class="flex-1">

@@ -235,7 +235,7 @@ function EmailPlan({ answers, steps, stateName }: { answers: Answers; steps: Ste
       <h3 class="text-[1.3rem]">Email this plan to yourself</h3>
       <p class="text-ink-2 mt-1">We'll send the {steps.length} steps for {stateName} as a plain email you can forward to family. This is the only time we ask for anything.</p>
       {status === 'ok' ? (
-        <p class="note note-green mt-4" role="status">Sent. Check your inbox in the next few minutes — and if it's not there, your spam folder.</p>
+        <p class="note note-green mt-4" role="status">Sent. Check your inbox in the next few minutes, and your spam folder if it is not there.</p>
       ) : (
         <form onSubmit={submit} class="mt-4 grid gap-4">
           <div class="flex flex-col sm:flex-row gap-3">
