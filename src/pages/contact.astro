@@ -9,7 +9,7 @@ import { SITE } from '../data/site';
       <h1>Say hello, ask a question, tell us what's wrong.</h1>
       <p class="lede mt-5">We read every message. If you have spotted an error in the guide, we especially want to know.</p>
       <form class="waitlist-form card grid gap-5 mt-8" method="POST" action={SITE.formEndpoint} data-ajax={SITE.formAjax} novalidate>
-        <input type="hidden" name="_subject" value="Alan Estate — contact" />
+        <input type="hidden" name="_subject" value="Alan Estate: contact" />
         <input type="hidden" name="_template" value="table" />
         <input type="hidden" name="_captcha" value="false" />
         <input type="hidden" name="_next" value={`${SITE.url}/thanks/`} />

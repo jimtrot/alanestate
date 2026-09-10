@@ -280,7 +280,7 @@ function KeepPlan({ answers, steps, stateName }: { answers: Answers; steps: Step
     setStatus('sending');
     const summary = Object.entries(answers).filter(([, v]) => v && v !== 'unsure').map(([k, v]) => (v === true ? k : `${k}=${v}`)).join(', ');
     const body = {
-      _subject: 'Alan Estate — waitlist from the plan builder', _template: 'table', _captcha: 'false',
+      _subject: 'Alan Estate: waitlist from the plan builder', _template: 'table', _captcha: 'false',
       segment: 'plan', email, state: answers.state, situation: summary, step_count: String(steps.length),
       page: location.pathname, submitted_at: new Date().toISOString(),
     };
