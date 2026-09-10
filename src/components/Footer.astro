@@ -1,0 +1,48 @@
+---
+import Logo from './Logo.astro';
+const year = new Date().getFullYear();
+---
+<footer class="mt-24 border-t border-line bg-paper-2">
+  <div class="container-x py-12 grid gap-10 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
+    <div class="max-w-sm">
+      <Logo />
+      <p class="mt-4 text-ink-2 text-[0.95rem]">A clear path through what comes next. Built in Australia by people who have been the executor.</p>
+      <p class="mt-4 text-ink-3 text-sm">Alan Estate is in development. The guide is free and always will be.</p>
+    </div>
+    <div>
+      <p class="eyebrow mb-3">The guide</p>
+      <ul class="space-y-2 text-[0.95rem] text-ink-2">
+        <li><a href="/guide/" class="no-underline hover:text-green">Build your plan</a></li>
+        <li><a href="/guide/first-days/" class="no-underline hover:text-green">The first days</a></li>
+        <li><a href="/guide/certified-copies/" class="no-underline hover:text-green">Certified copies</a></li>
+        <li><a href="/guide/who-to-notify/" class="no-underline hover:text-green">Who to notify</a></li>
+        <li><a href="/guide/finding-the-money/" class="no-underline hover:text-green">Finding the money</a></li>
+        <li><a href="/guide/smsf/" class="no-underline hover:text-green">When there's an SMSF</a></li>
+        <li><a href="/guide/probate/" class="no-underline hover:text-green">Probate, state by state</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="eyebrow mb-3">Alan Estate</p>
+      <ul class="space-y-2 text-[0.95rem] text-ink-2">
+        <li><a href="/families/" class="no-underline hover:text-green">For families</a></li>
+        <li><a href="/professionals/" class="no-underline hover:text-green">For professionals</a></li>
+        <li><a href="/bdbn-check/" class="no-underline hover:text-green">Super nomination check</a></li>
+        <li><a href="/about/" class="no-underline hover:text-green">About</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="eyebrow mb-3">Contact</p>
+      <ul class="space-y-2 text-[0.95rem] text-ink-2">
+        <li><a href="/families/#waitlist" class="no-underline hover:text-green">Join the waitlist</a></li>
+        <li><a href="/contact/" class="no-underline hover:text-green">Contact</a></li>
+        <li><a href="/privacy/" class="no-underline hover:text-green">Privacy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="border-t border-line">
+    <div class="container-x py-6 text-sm text-ink-3 flex flex-col md:flex-row gap-3 md:items-center md:justify-between">
+      <p>© {year} Alan Estate. General information only, not legal, financial or tax advice. Rules differ by state and change over time — check the linked official sources or speak to a professional about your situation.</p>
+      <p class="md:text-right shrink-0">Made in Victoria, Australia.</p>
+    </div>
+  </div>
+</footer>

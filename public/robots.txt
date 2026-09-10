@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://alanestate.com/sitemap-index.xml

@@ -1,0 +1,24 @@
+{
+  "name": "alanestate",
+  "version": "0.1.0",
+  "description": "Alan Estate — a clear path through what comes next. alanestate.com",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@astrojs/preact": "^6.0.5",
+    "@astrojs/sitemap": "^3.7.4",
+    "@tailwindcss/vite": "^4.3.3",
+    "astro": "^7.3.2",
+    "preact": "^10.29.8",
+    "tailwindcss": "^4.3.3"
+  },
+  "private": true,
+  "type": "module"
+}

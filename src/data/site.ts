@@ -1,0 +1,23 @@
+export const SITE = {
+  name: 'Alan Estate',
+  url: 'https://alanestate.com',
+  tagline: 'A clear path through what comes next.',
+  description:
+    'A free, step-by-step guide to what to do when someone dies in Australia — personalised to your state, the will, super and SMSF — from the people building Alan Estate.',
+  email: 'hello@alanestate.com',
+  /** FormSubmit alias (hides the destination mailbox). Submissions arrive by email. */
+  formEndpoint: 'https://formsubmit.co/630b17bffdccfbe1098db5acc284a769',
+  formAjax: 'https://formsubmit.co/ajax/630b17bffdccfbe1098db5acc284a769',
+};
+
+export const STATES = [
+  { code: 'VIC', name: 'Victoria' },
+  { code: 'NSW', name: 'New South Wales' },
+  { code: 'QLD', name: 'Queensland' },
+  { code: 'WA', name: 'Western Australia' },
+  { code: 'SA', name: 'South Australia' },
+  { code: 'TAS', name: 'Tasmania' },
+  { code: 'ACT', name: 'Australian Capital Territory' },
+  { code: 'NT', name: 'Northern Territory' },
+] as const;
+export type StateCode = (typeof STATES)[number]['code'];

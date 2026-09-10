@@ -1,0 +1,45 @@
+---
+const path = Astro.url.pathname;
+const nav = [
+  { href: '/guide/', label: 'The guide' },
+  { href: '/families/', label: 'For families' },
+  { href: '/professionals/', label: 'For professionals' },
+  { href: '/about/', label: 'About' },
+];
+const isActive = (href: string) => path === href || (href !== '/' && path.startsWith(href));
+import Logo from './Logo.astro';
+---
+<header class="border-b border-line bg-paper/95 backdrop-blur-sm sticky top-0 z-40">
+  <div class="container-x flex items-center justify-between gap-6 h-16">
+    <Logo />
+    <nav aria-label="Primary" class="hidden md:flex items-center gap-7 text-[0.97rem]">
+      {nav.map((n) => (
+        <a href={n.href} class={`no-underline hover:text-green transition-colors ${isActive(n.href) ? 'text-ink font-semibold' : 'text-ink-2'}`} aria-current={isActive(n.href) ? 'page' : undefined}>{n.label}</a>
+      ))}
+    </nav>
+    <div class="flex items-center gap-2">
+      <a href="/guide/" class="btn btn-primary btn-sm hidden sm:inline-flex">Get your plan</a>
+      <button type="button" class="md:hidden btn btn-secondary btn-sm px-3" aria-expanded="false" aria-controls="mobile-nav" id="nav-toggle">
+        <span class="sr-only">Menu</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+  <div id="mobile-nav" class="md:hidden border-t border-line bg-paper" hidden>
+    <nav aria-label="Primary mobile" class="container-x py-3 flex flex-col">
+      {nav.map((n) => (
+        <a href={n.href} class="py-3 no-underline border-b border-line last:border-0 text-ink-2 hover:text-green" aria-current={isActive(n.href) ? 'page' : undefined}>{n.label}</a>
+      ))}
+      <a href="/guide/" class="btn btn-primary mt-3">Get your plan</a>
+    </nav>
+  </div>
+</header>
+<script>
+  const t = document.getElementById('nav-toggle');
+  const m = document.getElementById('mobile-nav');
+  t?.addEventListener('click', () => {
+    const open = t.getAttribute('aria-expanded') === 'true';
+    t.setAttribute('aria-expanded', String(!open));
+    if (m) m.hidden = open;
+  });
+</script>

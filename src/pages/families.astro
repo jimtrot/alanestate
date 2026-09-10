@@ -1,0 +1,93 @@
+---
+import Base from '../layouts/Base.astro';
+import WaitlistForm from '../components/WaitlistForm.astro';
+---
+<Base title="For families" description="What Alan Estate is building for executors and for people who want their own affairs in order — and a waitlist if you'd like to be first to know.">
+  <section class="container-x pt-16 pb-12 md:pt-24 md:pb-16">
+    <div class="max-w-3xl">
+      <p class="eyebrow mb-5">For families</p>
+      <h1>For the person holding the folder.</h1>
+      <p class="lede mt-6">Whether you are the executor right now, or you want to make sure your own family never has to search, Alan Estate is being built for you. Here is what is coming, honestly described, and a way to be first to know.</p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href="#after" class="btn btn-secondary">Someone has died</a>
+        <a href="#before" class="btn btn-secondary">I want to get ahead of it</a>
+        <a href="#waitlist" class="btn btn-primary">Join the waitlist</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- After a death -->
+  <section id="after" class="border-t border-line bg-paper-2 scroll-mt-20">
+    <div class="container-x py-16 md:py-20">
+      <div class="grid gap-10 lg:grid-cols-[1fr_1.4fr] lg:gap-16">
+        <div>
+          <p class="eyebrow mb-4">After a death</p>
+          <h2>From "where do I even start" to a plan you can follow.</h2>
+          <p class="mt-4 text-ink-2">The free guide on this site is the first version of this. The product takes it much further.</p>
+          <p class="mt-6"><a href="/guide/" class="btn btn-primary">Use the free guide now</a></p>
+        </div>
+        <div class="grid gap-4 sm:grid-cols-2">
+          {[
+            ['A 20-minute intake, in your words', 'Tell us what you know — "Dad had an SMSF, a farm with a loan on it, two bank accounts and some shares" — and get a map of the estate: every asset, every institution, every gap still to fill.'],
+            ['A sequenced task list', 'Grouped by urgency: what must happen this week, what can wait a month, what belongs in month six. Deadlines flagged for your state and your situation.'],
+            ['Letters drafted for you', 'Notification letters for each bank, super fund, registry, insurer and agency, pre-filled with the right details and the documents each one asks for.'],
+            ['Plain-English answers, any time', '"Do we need probate?" "Can Mum keep the pension?" "What does a lapsed nomination actually mean?" Ask as things come up, for as long as the estate takes.'],
+            ['The SMSF path', 'Trustee changes, the 28-day ATO notice, the six-month restructure rule, checking the nomination, paying the benefit, winding the fund up — walked through step by step, with a clear signal when you need a specialist.'],
+            ['Share it with family', 'Invite your mother, your sibling, or the accountant to the same plan so everyone sees what is done and what is next.'],
+          ].map(([h, p]) => (
+            <div class="card"><h3 class="text-[1.15rem]">{h}</h3><p class="mt-2 text-ink-2 text-[0.95rem]">{p}</p></div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Before -->
+  <section id="before" class="border-t border-line scroll-mt-20">
+    <div class="container-x py-16 md:py-20">
+      <div class="grid gap-10 lg:grid-cols-[1fr_1.4fr] lg:gap-16">
+        <div>
+          <p class="eyebrow mb-4">Before — for yourself, or for a parent</p>
+          <h2>The envelope in the drawer that people mean to fill in, and never do.</h2>
+          <p class="mt-4 text-ink-2">A simple, private record of where everything is, kept current, handed to the right people at the right time. You can set it up for yourself or sit down with a parent and do it together.</p>
+        </div>
+        <div class="grid gap-4 sm:grid-cols-2">
+          {[
+            ['Where things are, not what they are worth', 'Which bank, which super fund, which accountant, where the will is, where the trust deed is. Institution names and contacts, not balances or passwords.'],
+            ['The super nomination, watched', 'Record the date the death benefit nomination was signed and whether it lapses. Get a reminder well before it expires, and a nudge to check it still names the right people.'],
+            ['Linked accounts', 'Nominate up to three people — a spouse, an adult child, the executor. They see nothing until the time comes, then they receive a handover kit organised by what to do first.'],
+            ['The SMSF essentials', 'Trustee structure, trust deed location, pension documents, the accountant and auditor — the things that decide whether the fund is straightforward or a two-year problem.'],
+            ['Your wishes, in your words', 'Funeral preferences, who to call, what matters. Optional, and often the part families are most grateful for.'],
+            ['A yearly check-in', 'Ten minutes once a year, prompted by us, to keep it true. Most records go stale within two years. This one will not.'],
+          ].map(([h, p]) => (
+            <div class="card"><h3 class="text-[1.15rem]">{h}</h3><p class="mt-2 text-ink-2 text-[0.95rem]">{p}</p></div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Honest section -->
+  <section class="border-t border-line bg-paper-2">
+    <div class="container-x py-14 md:py-16 grid gap-8 md:grid-cols-3">
+      <div>
+        <h3 class="text-[1.2rem]">What it will cost</h3>
+        <p class="mt-2 text-ink-2">We expect the executor's plan to be a one-off fee of a few hundred dollars — less than an hour of a lawyer's time — and the record to be under $100 a year. The guide stays free. Tell us on the form if that feels wrong.</p>
+      </div>
+      <div>
+        <h3 class="text-[1.2rem]">What it is not</h3>
+        <p class="mt-2 text-ink-2">It is not legal or financial advice, and it will say so when you need a professional. It does not hold your passwords. It does not replace your accountant; it makes their job easier.</p>
+      </div>
+      <div>
+        <h3 class="text-[1.2rem]">Where it starts</h3>
+        <p class="mt-2 text-ink-2">Victoria first, because probate and title rules differ by state and we would rather be right in one place than vague in eight. The free guide already covers every state and territory.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="container-x py-16 md:py-20">
+    <div class="max-w-2xl">
+      <WaitlistForm variant="families" heading="Be first to know" intro="Tell us a little about your situation so we build the right thing first. We will email when there is something real to show you, and not before." />
+    </div>
+  </section>
+</Base>
