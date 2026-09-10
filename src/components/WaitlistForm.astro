@@ -7,7 +7,7 @@
 import { SITE, STATES } from '../data/site';
 
 interface Props {
-  variant: 'families' | 'professionals' | 'plan';
+  variant: 'families' | 'professionals';
   id?: string;
   heading?: string;
   intro?: string;
@@ -16,7 +16,7 @@ interface Props {
   context?: Record<string, string>;
 }
 const { variant, id = 'waitlist', heading, intro, compact = false, context = {} } = Astro.props;
-const subject = variant === 'professionals' ? 'Alan Estate — professional waitlist' : variant === 'plan' ? 'Alan Estate — plan request' : 'Alan Estate — family waitlist';
+const subject = variant === 'professionals' ? 'Alan Estate: professional waitlist' : 'Alan Estate: family waitlist';
 ---
 <div id={id} class="scroll-mt-24">
   {heading && <h2 class="mb-2">{heading}</h2>}
@@ -108,11 +108,11 @@ const subject = variant === 'professionals' ? 'Alan Estate — professional wait
     <div class="field">
       <label class="label" for={`${id}-email`}>{variant === 'professionals' ? 'Work email' : 'Email'}</label>
       <input class="input" id={`${id}-email`} name="email" type="email" autocomplete="email" inputmode="email" required aria-describedby={`${id}-email-help`} />
-      <p class="help" id={`${id}-email-help`}>We'll use this to tell you when Alan Estate is ready{variant === 'plan' ? ' and to send your plan' : ''}. Nothing else.</p>
+      <p class="help" id={`${id}-email-help`}>We'll use this to tell you when Alan Estate is ready. Nothing else.</p>
       <p class="error-text" data-error hidden>Please enter a valid email address so we can reach you.</p>
     </div>
 
-    {variant !== 'plan' && (
+    {(
       <div class="field">
         <label class="label" for={`${id}-note`}>{variant === 'professionals' ? "What's the biggest gap you see for the families or clients you work with?" : 'What would have helped most?'} <span class="text-ink-3 font-normal">(optional)</span></label>
         <textarea class="textarea" id={`${id}-note`} name="note" rows="3"></textarea>
@@ -121,7 +121,7 @@ const subject = variant === 'professionals' ? 'Alan Estate — professional wait
 
     <div class="flex flex-col sm:flex-row sm:items-center gap-4">
       <button type="submit" class="btn btn-primary" data-submit>
-        <span data-label>{variant === 'plan' ? 'Email me my plan' : 'Join the waitlist'}</span>
+        <span data-label>Join the waitlist</span>
       </button>
       <p class="text-sm text-ink-3">By joining you agree we can email you about Alan Estate. Unsubscribe any time. <a href="/privacy/" class="underline">Privacy</a>.</p>
     </div>

@@ -135,7 +135,7 @@ export default function PlanBuilder() {
             <div class="flex items-center gap-3 no-print">
               <span class="tag tag-green">{completed} of {total} done</span>
               <button type="button" class="btn btn-secondary btn-sm" onClick={() => window.print()}>Print</button>
-              <a href="#email-plan" class="btn btn-secondary btn-sm">Email it to me</a>
+              <a href="#email-plan" class="btn btn-secondary btn-sm">Save a copy</a>
             </div>
           </div>
           <div class="h-1.5 rounded-full bg-paper-3 overflow-hidden mb-10" role="progressbar" aria-valuemin={0} aria-valuemax={total} aria-valuenow={completed} aria-label="Plan progress">
@@ -159,7 +159,7 @@ export default function PlanBuilder() {
             );
           })}
 
-          <EmailPlan answers={answers} steps={steps} stateName={stateName} />
+          <KeepPlan answers={answers} steps={steps} stateName={stateName} />
         </section>
       )}
       {!hydrated && <noscript><p class="mt-6 note">The plan builder needs JavaScript. Without it, you can still read <a href="/guide/first-days/">the first days</a> and the rest of the guide below.</p></noscript>}
@@ -209,46 +209,115 @@ function StepCard({ step, answers, done, onToggle }: { step: Step; answers: Answ
   );
 }
 
-function EmailPlan({ answers, steps, stateName }: { answers: Answers; steps: Step[]; stateName: string }) {
+function buildPlanText(answers: Answers, steps: Step[], stateName: string) {
+  const d = new Date().toLocaleDateString('en-AU', { day: 'numeric', month: 'long', year: 'numeric' });
+  const lines: string[] = [];
+  lines.push('WHAT TO DO WHEN SOMEONE DIES');
+  lines.push(`A plan for ${stateName}, prepared ${d}`);
+  lines.push('From alanestate.com. General information only, not legal advice.');
+  lines.push('');
+  const ctx: string[] = [];
+  if (answers.will === 'yes') ctx.push('there is a will');
+  if (answers.will === 'no') ctx.push('there is no will');
+  if (answers.partner) ctx.push('a surviving partner');
+  if (answers.smsf) ctx.push('a self-managed super fund');
+  if (answers.super) ctx.push('superannuation');
+  if (answers.property) ctx.push('property');
+  if (answers.shares) ctx.push('shares or managed funds');
+  if (answers.debts) ctx.push('a mortgage or other loan');
+  if (answers.business) ctx.push('a business or company directorship');
+  if (answers.centrelink) ctx.push('a Centrelink or DVA payment');
+  if (ctx.length) { lines.push(`Based on: ${ctx.join(', ')}.`); lines.push(''); }
+  lines.push(`${steps.length} steps in total.`);
+  lines.push('');
+  for (const ph of PHASES) {
+    const list = steps.filter((x) => x.phase === ph.id);
+    if (!list.length) continue;
+    lines.push('');
+    lines.push(`${ph.title.toUpperCase()}  (${ph.when})`);
+    lines.push(ph.note);
+    lines.push('');
+    for (const st of list) {
+      lines.push(`[ ] ${st.title}`);
+      if (st.deadline) lines.push(`    DEADLINE: ${st.deadline}`);
+      lines.push(`    ${st.summary}`);
+      const note = answers.state ? st.stateNotes?.[answers.state] : undefined;
+      if (note) lines.push(`    ${stateName}: ${note}`);
+      for (const d2 of st.detail ?? []) lines.push(`    - ${d2}`);
+      if (st.needs?.length) lines.push(`    You'll need: ${st.needs.join('; ')}`);
+      for (const l of (st.links ?? []).filter((l) => !l.states || (answers.state && l.states.includes(answers.state)))) {
+        lines.push(`    ${l.label}: ${l.href}`);
+      }
+      lines.push('');
+    }
+  }
+  lines.push('');
+  lines.push('Rules differ by state and change over time. Check the linked official');
+  lines.push('sources, or speak to a professional about your situation.');
+  lines.push('alanestate.com');
+  return lines.join('\n');
+}
+
+function KeepPlan({ answers, steps, stateName }: { answers: Answers; steps: Step[]; stateName: string }) {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'sending' | 'ok' | 'err'>('idle');
-  const [consent, setConsent] = useState(true);
+
+  function download() {
+    const text = buildPlanText(answers, steps, stateName);
+    const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `estate-plan-${(answers.state || 'au').toLowerCase()}.txt`;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+    (window as any).__aeTrack?.('plan_downloaded', { state: answers.state });
+  }
+
   async function submit(e: Event) {
     e.preventDefault();
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { setStatus('err'); return; }
     setStatus('sending');
     const summary = Object.entries(answers).filter(([, v]) => v && v !== 'unsure').map(([k, v]) => (v === true ? k : `${k}=${v}`)).join(', ');
     const body = {
-      _subject: 'Alan Estate — plan request', _template: 'table', _captcha: 'false',
-      segment: 'plan', email, state: answers.state, situation: summary, keep_in_touch: consent ? 'yes' : 'no',
-      steps: steps.map((s) => `[${s.phase}] ${s.title}`).join('\n'),
+      _subject: 'Alan Estate — waitlist from the plan builder', _template: 'table', _captcha: 'false',
+      segment: 'plan', email, state: answers.state, situation: summary, step_count: String(steps.length),
       page: location.pathname, submitted_at: new Date().toISOString(),
     };
     try {
       const r = await fetch(SITE.formAjax, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(body) });
       const j = await r.json().catch(() => ({}));
-      if (r.ok && String(j.success) === 'true') { setStatus('ok'); (window as any).__aeTrack?.('plan_emailed'); } else setStatus('err');
+      if (r.ok && String(j.success) === 'true') { setStatus('ok'); (window as any).__aeTrack?.('waitlist_submit', { segment: 'plan' }); } else setStatus('err');
     } catch { setStatus('err'); }
   }
+
   return (
-    <div id="email-plan" class="card-paper mt-6 scroll-mt-24 no-print">
-      <h3 class="text-[1.3rem]">Email this plan to yourself</h3>
-      <p class="text-ink-2 mt-1">We'll send the {steps.length} steps for {stateName} as a plain email you can forward to family. This is the only time we ask for anything.</p>
-      {status === 'ok' ? (
-        <p class="note note-green mt-4" role="status">Sent. Check your inbox in the next few minutes, and your spam folder if it is not there.</p>
-      ) : (
-        <form onSubmit={submit} class="mt-4 grid gap-4">
-          <div class="flex flex-col sm:flex-row gap-3">
-            <div class="field flex-1">
-              <label class="label sr-only" for="plan-email">Email</label>
-              <input id="plan-email" class="input" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" value={email} onInput={(e) => setEmail((e.currentTarget as HTMLInputElement).value)} aria-invalid={status === 'err'} />
+    <div id="email-plan" class="mt-8 scroll-mt-24 no-print grid gap-4 md:grid-cols-2">
+      <div class="card-paper">
+        <h3 class="text-[1.25rem]">Keep your plan</h3>
+        <p class="text-ink-2 mt-1 text-[0.97rem]">Your answers and ticks are saved in this browser, so you can close the page and come back. To keep a copy you can forward to family, download it or print it.</p>
+        <div class="mt-4 flex flex-wrap gap-3">
+          <button type="button" class="btn btn-primary btn-sm" onClick={download}>Download as a text file</button>
+          <button type="button" class="btn btn-secondary btn-sm" onClick={() => window.print()}>Print or save as PDF</button>
+        </div>
+      </div>
+      <div class="card-paper">
+        <h3 class="text-[1.25rem]">Hear when Alan Estate launches</h3>
+        <p class="text-ink-2 mt-1 text-[0.97rem]">We are building a version that drafts the letters and answers questions as they come up. Leave your email and we will tell you when it is ready. Nothing else.</p>
+        {status === 'ok' ? (
+          <p class="note note-green mt-4" role="status">Thank you. You are on the list.</p>
+        ) : (
+          <form onSubmit={submit} class="mt-4 grid gap-3">
+            <div class="flex flex-col sm:flex-row gap-2">
+              <label class="sr-only" for="plan-email">Email</label>
+              <input id="plan-email" class="input flex-1" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" value={email} onInput={(e) => setEmail((e.currentTarget as HTMLInputElement).value)} aria-invalid={status === 'err'} />
+              <button type="submit" class="btn btn-primary" disabled={status === 'sending'}>{status === 'sending' ? 'Sending' : 'Join'}</button>
             </div>
-            <button type="submit" class="btn btn-primary" disabled={status === 'sending'}>{status === 'sending' ? 'Sending…' : 'Send my plan'}</button>
-          </div>
-          {status === 'err' && <p class="error-text" role="alert">Please check the email address and try again.</p>}
-          <label class="choice"><input type="checkbox" checked={consent} onChange={(e) => setConsent((e.currentTarget as HTMLInputElement).checked)} /><span>It's OK to email me when Alan Estate launches. <span class="text-ink-3">Unsubscribe any time. <a href="/privacy/" class="underline">Privacy</a>.</span></span></label>
-        </form>
-      )}
+            {status === 'err' && <p class="error-text" role="alert">Please check the email address and try again.</p>}
+            <p class="text-sm text-ink-3">Unsubscribe any time. <a href="/privacy/" class="underline">Privacy</a>.</p>
+          </form>
+        )}
+      </div>
     </div>
   );
 }
