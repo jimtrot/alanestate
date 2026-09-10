@@ -1,0 +1,164 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="Super nomination check" description="A 30-second check: is your superannuation death benefit nomination still valid, and when does it need renewing? Covers industry, retail and self-managed super funds.">
+  <section class="container-x pt-16 pb-10 md:pt-24">
+    <div class="max-w-3xl">
+      <p class="eyebrow mb-5">Free check · takes 30 seconds</p>
+      <h1>Is your super nomination still doing its job?</h1>
+      <p class="lede mt-6">Superannuation sits outside your will. Who receives it depends on a death benefit nomination, and many nominations expire after three years without anyone noticing. Enter what you know and we'll tell you where you stand.</p>
+    </div>
+  </section>
+
+  <section class="container-x pb-16">
+    <div class="grid gap-8 lg:grid-cols-[1fr_1fr]">
+      <form id="bdbn-form" class="card grid gap-5" novalidate>
+        <div class="field">
+          <label class="label" for="fund">What kind of super fund is it?</label>
+          <select id="fund" class="select" required>
+            <option value="">Choose…</option>
+            <option value="apra">Industry or retail fund (AustralianSuper, Aware, Rest, Hostplus, a bank or insurer fund, etc.)</option>
+            <option value="smsf">Self-managed super fund (SMSF)</option>
+            <option value="unsure">Not sure</option>
+          </select>
+        </div>
+        <div class="field">
+          <label class="label" for="type">What kind of nomination did you make?</label>
+          <select id="type" class="select" required>
+            <option value="">Choose…</option>
+            <option value="lapsing">Binding, lapsing (the usual kind, needs renewing)</option>
+            <option value="nonlapsing">Binding, non-lapsing</option>
+            <option value="nonbinding">Non-binding (a "preferred" nomination)</option>
+            <option value="reversionary">Reversionary pension nomination</option>
+            <option value="none">I haven't made one</option>
+            <option value="unsure">Not sure</option>
+          </select>
+          <p class="help">It should say on the form you signed, or on your fund's member statement.</p>
+        </div>
+        <div class="field">
+          <label class="label" for="signed">When did you sign or last confirm it?</label>
+          <input id="signed" class="input" type="date" max="2099-12-31" />
+          <p class="help">Leave blank if you don't know.</p>
+        </div>
+        <fieldset class="grid gap-2">
+          <legend class="label mb-1">Has anything changed since then?</legend>
+          <label class="choice"><input type="checkbox" id="ch-relationship" /><span>Married, separated, divorced, or a new partner</span></label>
+          <label class="choice"><input type="checkbox" id="ch-children" /><span>A child has become financially independent, or a nominated person has died</span></label>
+          <label class="choice"><input type="checkbox" id="ch-witness" /><span>Someone who benefits from the nomination was one of the witnesses</span></label>
+        </fieldset>
+        <div class="flex items-center gap-3">
+          <button type="submit" class="btn btn-primary">Check my nomination</button>
+          <p class="text-sm text-ink-3">Nothing you enter is sent anywhere.</p>
+        </div>
+      </form>
+
+      <div id="bdbn-result" class="card-paper" aria-live="polite">
+        <p class="eyebrow mb-3">What this checks</p>
+        <ul class="space-y-3 text-ink-2">
+          <li><strong class="text-ink">Whether it has lapsed.</strong> In industry and retail funds, a binding nomination generally expires three years after you sign it unless the fund offers a non-lapsing option. Once it lapses, the fund's trustee decides who gets the money.</li>
+          <li><strong class="text-ink">Whether the SMSF rules are different.</strong> They are. In a self-managed fund, the three-year rule doesn't apply automatically: the fund's trust deed decides whether nominations lapse, how they must be witnessed, and what happens without one.</li>
+          <li><strong class="text-ink">Whether it still names the right people.</strong> Super can only be paid directly to your dependants under super law, or to your estate. A financially independent adult child is usually not a dependant, so a nomination naming them may not hold.</li>
+          <li><strong class="text-ink">Whether life has moved on.</strong> A nomination signed before a marriage, separation or a new partner is a common source of family dispute.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-t border-line bg-paper-2">
+    <div class="container-x py-14 grid gap-8 md:grid-cols-3">
+      <div>
+        <h3 class="text-[1.2rem]">Why it matters</h3>
+        <p class="mt-2 text-ink-2">For many Australians over sixty, super is the largest single asset, and it does not pass under the will. A lapsed or invalid nomination means the trustee decides, and in a blended family that decision is where disputes start.</p>
+      </div>
+      <div>
+        <h3 class="text-[1.2rem]">What to do about it</h3>
+        <p class="mt-2 text-ink-2">Ask your fund (or, for an SMSF, your accountant or the trust deed) three questions: is my nomination binding, does it lapse, and who does it name. Renewing usually takes one form and two independent witnesses.</p>
+      </div>
+      <div>
+        <h3 class="text-[1.2rem]">Keep it from happening again</h3>
+        <p class="mt-2 text-ink-2">Alan Estate is building a simple record that tracks your nomination date and reminds you and your accountant before it lapses. <a href="/families/#before" class="underline text-green">See what's coming</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="container-x py-14">
+    <div class="prose">
+      <h2>The fine print, in plain English</h2>
+      <p>This is general information about how superannuation death benefit nominations commonly work in Australia. It is not financial or legal advice and it can't see your fund's rules. Industry and retail funds are governed by the <em>Superannuation Industry (Supervision) Regulations</em> (regulation 6.17A gives binding nominations a three-year life unless the fund offers non-lapsing ones). Self-managed funds are governed by their own trust deed, which may allow non-lapsing nominations or set different witnessing rules. The High Court confirmed in <em>Hill v Zuda</em> (2022) that the three-year regulation does not apply to SMSFs. If anything here is unclear for your situation, ask your fund, your accountant, or an SMSF or estate planning lawyer.</p>
+    </div>
+  </section>
+</Base>
+
+<script>
+  const form = document.getElementById('bdbn-form') as HTMLFormElement;
+  const out = document.getElementById('bdbn-result') as HTMLElement;
+  const original = out.innerHTML;
+  const fmt = (d: Date) => d.toLocaleDateString('en-AU', { day: 'numeric', month: 'long', year: 'numeric' });
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const fund = (document.getElementById('fund') as HTMLSelectElement).value;
+    const type = (document.getElementById('type') as HTMLSelectElement).value;
+    const signedStr = (document.getElementById('signed') as HTMLInputElement).value;
+    const rel = (document.getElementById('ch-relationship') as HTMLInputElement).checked;
+    const kids = (document.getElementById('ch-children') as HTMLInputElement).checked;
+    const wit = (document.getElementById('ch-witness') as HTMLInputElement).checked;
+    if (!fund || !type) { form.reportValidity(); return; }
+
+    const signed = signedStr ? new Date(signedStr) : null;
+    const now = new Date();
+    const expiry = signed ? new Date(signed.getFullYear() + 3, signed.getMonth(), signed.getDate()) : null;
+    const daysLeft = expiry ? Math.round((expiry.getTime() - now.getTime()) / 86400000) : null;
+
+    let status: 'red' | 'amber' | 'green' = 'amber';
+    let headline = '';
+    const points: string[] = [];
+
+    if (type === 'none') {
+      status = 'red'; headline = 'There is no nomination, so the trustee decides.';
+      points.push('Without a nomination, the fund\'s trustee chooses who receives your super from among your dependants and your estate. That can take months and is the most common starting point for disputes.');
+      points.push(fund === 'smsf' ? 'In an SMSF the surviving trustee makes that decision, often your spouse, under pressure from other family members.' : 'Most industry and retail funds let you make a binding nomination online or with one form.');
+    } else if (type === 'nonbinding') {
+      status = 'amber'; headline = 'A non-binding nomination is a preference, not an instruction.';
+      points.push('The trustee will consider it but is not bound by it. If you want certainty, ask your fund for a binding nomination form.');
+    } else if (type === 'reversionary') {
+      status = 'green'; headline = 'A reversionary pension continues automatically to the person you named.';
+      points.push('Check that the named person is still the right one, and that any accumulation balance (money not in the pension) has its own nomination, because a reversionary nomination only covers the pension.');
+    } else if (type === 'nonlapsing') {
+      status = 'green'; headline = 'A non-lapsing nomination does not expire, but it can still go out of date.';
+      points.push(fund === 'smsf' ? 'Confirm the trust deed actually allows non-lapsing nominations; if it does not, yours may be treated as lapsing.' : 'Confirm with your fund that it was accepted as non-lapsing; not every fund offers them.');
+    } else if (type === 'lapsing' || type === 'unsure') {
+      if (fund === 'smsf') {
+        status = signed && daysLeft !== null && daysLeft < 0 ? 'amber' : 'amber';
+        headline = 'In an SMSF, the trust deed decides whether it has lapsed.';
+        points.push('The three-year rule that applies to industry and retail funds does not automatically apply to self-managed funds. Some deeds adopt it, some allow non-lapsing nominations, and some say nothing, in which case the nomination may not bind the trustee at all.');
+        if (expiry) points.push(`If your deed follows the three-year convention, this nomination ${daysLeft! < 0 ? `would have lapsed on ${fmt(expiry)}` : `would lapse on ${fmt(expiry)} (${daysLeft} days from now)`}. Ask your accountant or SMSF adviser to check the deed.`);
+      } else if (expiry && daysLeft !== null) {
+        if (daysLeft < 0) { status = 'red'; headline = `It most likely lapsed on ${fmt(expiry)}.`; points.push('A lapsed binding nomination is treated as no nomination, so the trustee decides. Renew it: most funds accept a new form or an online confirmation.'); }
+        else if (daysLeft <= 180) { status = 'amber'; headline = `It lapses on ${fmt(expiry)}, ${daysLeft} days from now.`; points.push('Renew it now rather than later. Many funds let you confirm the existing nomination without changing it.'); }
+        else { status = 'green'; headline = `It should be current until ${fmt(expiry)}.`; points.push('Put the renewal date somewhere you will see it. Nominations rarely lapse because people decide to let them; they lapse because nobody wrote the date down.'); }
+      } else {
+        status = 'amber'; headline = 'Find the date you signed. It decides everything.';
+        points.push('Binding nominations in industry and retail funds generally expire three years after signing. Your fund can tell you the date and whether it is still in force; it is usually on your annual statement or in your online account.');
+      }
+    }
+
+    if (rel) points.push('A change of relationship is the single most important reason to redo a nomination. Separation does not automatically cancel it; a former partner may still be named.');
+    if (kids) points.push('Super can only be paid directly to dependants under super law (a spouse, a child, someone financially dependent on you, or an interdependent person) or to your estate. An independent adult child is generally not a dependant. If you want them to benefit, nominating your legal personal representative and dealing with it in your will is the usual route. Ask an adviser.');
+    if (wit) points.push('Binding nominations need two adult witnesses who are not named in the nomination. If a beneficiary witnessed it, it may be invalid.');
+
+    const colour = status === 'red' ? 'var(--color-error)' : status === 'amber' ? 'var(--color-ochre)' : 'var(--color-green)';
+    out.innerHTML = `
+      <p class="eyebrow mb-3">Your result</p>
+      <h2 class="text-[1.6rem]" style="color:${colour}">${headline}</h2>
+      <ul class="mt-4 space-y-3 text-ink-2 list-disc pl-5">${points.map((p) => `<li>${p}</li>`).join('')}</ul>
+      <div class="mt-6 grid gap-3">
+        <a href="/families/#before" class="btn btn-primary">Get reminded before it lapses</a>
+        <button type="button" class="btn btn-quiet" id="bdbn-reset">Check another</button>
+      </div>
+      <p class="mt-4 text-sm text-ink-3">General information only. Your fund's rules or trust deed decide the outcome.</p>`;
+    out.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    (window as any).__aeTrack?.('bdbn_check', { fund, type, status });
+    document.getElementById('bdbn-reset')?.addEventListener('click', () => { out.innerHTML = original; form.reset(); });
+  });
+</script>

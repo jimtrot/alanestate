@@ -25,7 +25,7 @@ const jsonLd = {
         <p class="mt-5 text-sm text-ink-3">No account. No payment. Nothing stored unless you ask us to email it to you.</p>
       </div>
       <div class="card-paper relative overflow-hidden">
-        <p class="eyebrow mb-4">A plan, not a pamphlet</p>
+        <p class="eyebrow mb-4">How the plan is sequenced</p>
         <ol class="space-y-4">
           {[
             ['Now', 'Register the death, find the will, get certified copies'],
@@ -49,12 +49,12 @@ const jsonLd = {
     <div class="container-x py-16 md:py-20 grid gap-10 lg:grid-cols-[1fr_1.3fr] lg:gap-16">
       <div>
         <p class="eyebrow mb-4">Why this exists</p>
-        <h2>The will says who gets what. It doesn't say where anything is, or who to call.</h2>
+        <h2>A will says who inherits. It does not say where anything is, or who has to be told.</h2>
       </div>
       <div class="prose text-ink-2">
-        <p>When one of us lost his father, the will was in the back of a filing cabinet at the farm, written thirty years earlier. The super was in a self-managed fund invested directly with a dozen managers, and the accountant's records were years out of date. There was a reverse mortgage nobody knew the terms of. The nomination for the super had lapsed years before, and nobody knew that either.</p>
-        <p>Every institution wanted its own form, its own certified copies, and its own way of being told. Eighteen months later the estate was still open.</p>
-        <p>None of that was unusual. It is what most Australian families walk into, with no map. Alan Estate is the map: the order of operations, what each step needs, who to contact, and where the traps are — starting with the free guide on this site.</p>
+        <p>Around 187,000 people die in Australia each year, and roughly two thirds of them are over 75. That is the group most likely to leave superannuation, property and a self-managed fund behind. The Australian Taxation Office's own expectation is that finalising an estate takes six to twelve months. In practice, families routinely spend longer than that.</p>
+        <p>The reason is rarely the law. It is that the work arrives all at once, with no sequence and no single source of truth. Every institution asks for its own form and its own certified copies. Superannuation sits outside the will and follows different rules again. Deadlines exist but are not announced. And the person doing the work is usually doing it for the first time, while grieving.</p>
+        <p>Alan Estate was started by people who have administered an estate and found that nobody hands you the list. So we wrote it: the order of operations, what each step requires, who to contact, and where the costly mistakes are. The guide on this site is free and stays free.</p>
       </div>
     </div>
   </section>
@@ -67,10 +67,10 @@ const jsonLd = {
     </div>
     <div class="grid gap-px bg-line border border-line rounded-lg overflow-hidden sm:grid-cols-2 lg:grid-cols-3">
       {[
-        ['/guide/', 'Build your plan', 'Answer six questions and get a sequenced checklist for your situation — state, will, super, property, SMSF. Tick things off. Print it. Email it to yourself.'],
+        ['/guide/', 'Build your plan', 'Answer six questions and get a sequenced checklist for your situation: state, will, super, property, SMSF. Tick things off, print it, or email it to yourself.'],
         ['/guide/first-days/', 'The first days', 'Who certifies the death, what the funeral director handles, where to look for the will, and what not to rush.'],
         ['/guide/certified-copies/', 'Certified copies', 'The most frustrating part of the whole process. Who can certify in your state, how many copies to get, and how to avoid doing it three times.'],
-        ['/guide/who-to-notify/', 'Who to notify', 'Government, banks, super, insurers, utilities, subscriptions — and the free government service that tells many of them at once.'],
+        ['/guide/who-to-notify/', 'Who to notify', 'Government, banks, super, insurers, utilities and subscriptions, plus the free government service that tells many of them at once.'],
         ['/guide/finding-the-money/', 'Finding the money', 'Lost super, share registries, unclaimed money, managed funds, and what to do when the records are out of date.'],
         ['/guide/smsf/', 'When there is an SMSF', 'The deadlines that bite, what the surviving trustee must do, why the nomination matters, and how to wind the fund up.'],
       ].map(([href, title, desc]) => (
@@ -95,13 +95,13 @@ const jsonLd = {
         <div class="card flex flex-col">
           <p class="eyebrow mb-3">For families</p>
           <h3>Your plan, your documents, one place</h3>
-          <p class="mt-3 text-ink-2 flex-1">After a death: a personalised plan, drafted letters to every institution, and plain-English answers. Before: a simple record of where everything is — accounts, super, the nomination and its renewal date — with a handover to the people you choose when the time comes.</p>
+          <p class="mt-3 text-ink-2 flex-1">After a death: a personalised plan, drafted letters to every institution, and plain-English answers. Before: a simple record of where everything is, covering accounts, super, and the nomination and its renewal date, with a handover to the people you choose when the time comes.</p>
           <a href="/families/" class="btn btn-secondary mt-6 self-start">See what's coming for families</a>
         </div>
         <div class="card flex flex-col">
           <p class="eyebrow mb-3">For professionals</p>
           <h3>Send families somewhere good</h3>
-          <p class="mt-3 text-ink-2 flex-1">Funeral directors, aged care providers, SMSF accountants and advisers see the same gap every week: a family leaves the room with a folder and no idea what to do next. We're building the thing you can hand them — and, for SMSF practices, the nomination tracking that stops the worst case before it starts.</p>
+          <p class="mt-3 text-ink-2 flex-1">Funeral directors, aged care providers, SMSF accountants and advisers see the same gap every week: a family leaves the room with a folder and no clear idea of what happens next. We are building the thing you can hand them, and for SMSF practices, the nomination tracking that catches the worst case early.</p>
           <a href="/professionals/" class="btn btn-secondary mt-6 self-start">See the founding partner pilot</a>
         </div>
       </div>
@@ -112,7 +112,7 @@ const jsonLd = {
   <section class="border-t border-line bg-paper-2">
     <div class="container-x py-16 md:py-20 grid gap-10 md:grid-cols-3">
       {[
-        ['General information, sourced', 'Every step links to the official source — the court, the ATO, Services Australia, your state registry. Where rules differ by state, we say so. Where we are not sure, we say that too.'],
+        ['General information, sourced', 'Every step links to the official source: the court, the ATO, Services Australia, or your state registry. Where rules differ by state, we say so. Where we are not sure, we say that too.'],
         ['Unhurried by design', 'Most of this can wait until after the funeral. The plan tells you what genuinely cannot, and leaves the rest until you are ready.'],
         ['Nothing to sign up for', 'The guide runs in your browser. We do not store what you enter unless you ask us to email you a copy.'],
       ].map(([h, p]) => (

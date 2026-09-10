@@ -1,0 +1,67 @@
+---
+import Base from '../../layouts/Base.astro';
+import PlanBuilder from '../../islands/PlanBuilder';
+import { PHASES } from '../../data/plan-types';
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  name: 'What to do when someone dies in Australia',
+  description: 'A sequenced, personalised checklist for executors and families after a death in Australia, covering registration, certified copies, notifications, probate, superannuation and SMSFs.',
+  step: PHASES.map((p) => ({ '@type': 'HowToSection', name: p.title, text: p.note })),
+};
+---
+<Base title="What to do when someone dies in Australia" description="A free, personalised, step-by-step plan for the weeks and months after a death in Australia — by state, with or without a will, with super, property and SMSF steps. Tick things off, print it, email it to yourself." jsonLd={jsonLd}>
+  <section class="container-x pt-14 pb-10 md:pt-20">
+    <div class="max-w-3xl">
+      <p class="eyebrow mb-5">The guide · free, no sign-up</p>
+      <h1>What to do when someone dies in Australia</h1>
+      <p class="lede mt-6">There are about forty things to do after a death, and almost nobody tells you the order. This builds your list: sequenced, specific to your state and situation, with what each step needs and a link to the official source.</p>
+    </div>
+  </section>
+
+  <section class="container-x pb-16">
+    <PlanBuilder client:load />
+  </section>
+
+  <section class="border-t border-line bg-paper-2">
+    <div class="container-x py-16">
+      <div class="max-w-2xl mb-8">
+        <p class="eyebrow mb-3">How the plan is organised</p>
+        <h2>Five phases. Only the first one is urgent.</h2>
+      </div>
+      <ol class="grid gap-4 md:grid-cols-5">
+        {PHASES.map((p, i) => (
+          <li class="card">
+            <p class="num text-2xl">{i + 1}</p>
+            <h3 class="text-[1.1rem] mt-1">{p.title}</h3>
+            <p class="text-sm text-ink-3 mt-0.5">{p.when}</p>
+            <p class="text-ink-2 text-[0.93rem] mt-2">{p.note}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="container-x py-16">
+    <div class="max-w-2xl mb-8">
+      <p class="eyebrow mb-3">Go deeper</p>
+      <h2>The parts people get stuck on</h2>
+    </div>
+    <div class="grid gap-px bg-line border border-line rounded-lg overflow-hidden sm:grid-cols-2 lg:grid-cols-3">
+      {[
+        ['/guide/first-days/', 'The first days', 'Who certifies the death, what the funeral director handles, and where to look for the will.'],
+        ['/guide/certified-copies/', 'Certified copies', 'Who can certify in your state, how many to get, and how to stop doing it three times.'],
+        ['/guide/who-to-notify/', 'Who to notify', 'Government, banks, super, insurers, utilities — and the free service that tells many at once.'],
+        ['/guide/finding-the-money/', 'Finding the money', 'Lost super, share registries, unclaimed money, and out-of-date records.'],
+        ['/guide/smsf/', 'When there is an SMSF', 'The 28-day and six-month deadlines, the nomination, and winding up.'],
+        ['/guide/probate/', 'Probate, state by state', 'Whether you need it, which court, what it costs, and how long it takes.'],
+      ].map(([href, title, desc]) => (
+        <a href={href} class="bg-white p-6 no-underline group hover:bg-green-tint transition-colors">
+          <h3 class="text-[1.2rem] group-hover:text-green transition-colors">{title}</h3>
+          <p class="mt-2 text-ink-2 text-[0.95rem]">{desc}</p>
+        </a>
+      ))}
+    </div>
+    <p class="mt-8 text-sm text-ink-3 max-w-prose">General information only, carefully sourced and dated September 2026. Rules differ by state and change over time; the links on each step go to the official source so you can check. If a step says to get advice, please do.</p>
+  </section>
+</Base>

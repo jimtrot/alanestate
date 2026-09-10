@@ -1,0 +1,80 @@
+---
+import Base from './Base.astro';
+import { SITE } from '../data/site';
+
+interface Props {
+  title: string;
+  description: string;
+  eyebrow: string;
+  lede: string;
+  updated?: string;
+  next?: { href: string; label: string };
+  prev?: { href: string; label: string };
+}
+const { title, description, eyebrow, lede, updated = 'September 2026', next, prev } = Astro.props;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  datePublished: '2026-09-10',
+  publisher: { '@type': 'Organization', name: SITE.name, url: SITE.url },
+  isAccessibleForFree: true,
+};
+const nav = [
+  { href: '/guide/first-days/', label: 'The first days' },
+  { href: '/guide/certified-copies/', label: 'Certified copies' },
+  { href: '/guide/who-to-notify/', label: 'Who to notify' },
+  { href: '/guide/finding-the-money/', label: 'Finding the money' },
+  { href: '/guide/smsf/', label: 'When there is an SMSF' },
+  { href: '/guide/probate/', label: 'Probate, state by state' },
+];
+const path = Astro.url.pathname;
+---
+<Base title={title} description={description} ogType="article" jsonLd={jsonLd}>
+  <div class="container-x py-10 md:py-14">
+    <nav aria-label="Breadcrumb" class="text-sm text-ink-3 mb-8">
+      <a href="/guide/" class="no-underline hover:text-green">The guide</a> <span aria-hidden="true">/</span> <span class="text-ink-2">{title}</span>
+    </nav>
+    <div class="grid gap-12 lg:grid-cols-[1fr_16rem] lg:gap-16">
+      <div>
+        <header class="mb-10">
+          <p class="eyebrow mb-4">{eyebrow}</p>
+          <h1>{title}</h1>
+          <p class="lede mt-5 max-w-2xl">{lede}</p>
+        </header>
+        <article class="prose">
+          <slot />
+        </article>
+
+        <div class="mt-14 pt-8 rule flex flex-col sm:flex-row gap-4 sm:justify-between">
+          {prev ? <a href={prev.href} class="btn btn-secondary">← {prev.label}</a> : <span />}
+          {next && <a href={next.href} class="btn btn-primary">{next.label} →</a>}
+        </div>
+
+        <div class="mt-10 note">
+          <p class="font-semibold">This is general information, not advice.</p>
+          <p class="text-ink-2 mt-1 text-[0.97rem]">Every fact here links to its official source and was checked in {updated}. Rules differ between states and change over time. Nothing on this page is legal, financial or tax advice, and it cannot account for your circumstances. Where a step says to get advice, please do. If you find something wrong here, <a href="/contact/">tell us</a> and we will fix it.</p>
+        </div>
+      </div>
+
+      <aside class="lg:sticky lg:top-24 lg:self-start no-print">
+        <div class="card-paper">
+          <p class="eyebrow mb-3">Build your own plan</p>
+          <p class="text-[0.95rem] text-ink-2">Six questions gives you a sequenced checklist for your state and situation, with only the steps that apply to you.</p>
+          <a href="/guide/" class="btn btn-primary btn-sm mt-4 w-full">Start the plan</a>
+        </div>
+        <nav aria-label="Guide sections" class="mt-6">
+          <p class="eyebrow mb-3">In this guide</p>
+          <ul class="space-y-1 text-[0.95rem]">
+            {nav.map((n) => (
+              <li>
+                <a href={n.href} class={`block py-1.5 no-underline hover:text-green ${path === n.href ? 'text-ink font-semibold' : 'text-ink-2'}`} aria-current={path === n.href ? 'page' : undefined}>{n.label}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </aside>
+    </div>
+  </div>
+</Base>
