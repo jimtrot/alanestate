@@ -1,0 +1,24 @@
+---
+import MockWindow from './MockWindow.astro';
+interface Props { class?: string }
+const { class: extra = '' } = Astro.props;
+const people = [
+  { who: 'Sarah Nguyen', role: 'Executor', cls: '', status: 'Step 14 of 38' },
+  { who: 'R. Patel', role: 'Accountant', cls: 'tag-ochre', status: 'Waiting on you: SMSF trustee change' },
+  { who: 'Hillside Funerals', role: 'Funeral director', cls: 'tag-green', status: 'Aftercare card sent' },
+  { who: 'Kingsley & Co', role: 'Estate lawyer', cls: '', status: 'Probate application drafted' },
+];
+---
+<MockWindow class={extra} title="Estate of Peter Nguyen · Shared with" summary="Illustration of one estate shared between the executor, the accountant, the funeral director and the lawyer, each showing what is done and what is waiting on them.">
+  <ul class="m-0 p-0 list-none">
+    {people.map((p, i) => (
+      <li class={`flex items-start justify-between gap-3 py-2 px-0.5 ${i ? 'border-t border-line' : ''}`}>
+        <span><span class="font-semibold block">{p.who}</span><span class="text-ink-3 text-[0.8125rem]">{p.role}</span></span>
+        <span class={`tag ${p.cls} text-right`} style="white-space:normal">{p.status}</span>
+      </li>
+    ))}
+  </ul>
+  <div class="mt-2 flex items-center gap-2 text-[0.8125rem] text-ink-3">
+    <span class="w-2 h-2 rounded-full bg-green inline-block"></span>Shared with the family's consent
+  </div>
+</MockWindow>

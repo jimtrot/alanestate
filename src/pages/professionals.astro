@@ -4,6 +4,7 @@ import PartnerForm from '../components/PartnerForm.astro';
 import EstateRecord from '../components/mockups/EstateRecord.astro';
 import ExecutorPlan from '../components/mockups/ExecutorPlan.astro';
 import PracticeView from '../components/mockups/PracticeView.astro';
+import SharedEstate from '../components/mockups/SharedEstate.astro';
 ---
 <Base title="For professionals" description="Alan Estate is building one shared record for an estate, connecting the person planning ahead, their executor and their professional advisers. Founding partner places are open in Victoria.">
   <section class="container-x pt-16 pb-14 md:pt-24 md:pb-20">
@@ -18,7 +19,7 @@ import PracticeView from '../components/mockups/PracticeView.astro';
         </div>
       </div>
       <div class="lg:rotate-1 max-w-md w-full lg:justify-self-end">
-        <EstateRecord />
+        <PracticeView />
       </div>
     </div>
   </section>
@@ -70,7 +71,7 @@ import PracticeView from '../components/mockups/PracticeView.astro';
             <h3 class="text-[1.5rem]">Everyone sees what they need</h3>
             <p class="mt-3 text-ink-2">With the family's consent, their professionals see where the estate is up to and what's waiting on them. When a matter needs a lawyer or SMSF specialist, the plan says so and refers the family on, to you if they came from you.</p>
           </div>
-          <div class="max-w-md w-full"><PracticeView /></div>
+          <div class="max-w-md w-full"><SharedEstate /></div>
         </div>
       </div>
     </div>
