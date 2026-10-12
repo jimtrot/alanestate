@@ -1,0 +1,100 @@
+---
+/**
+ * Founding partner enquiry. Posts via scripts/forms.ts (no endpoint in the HTML).
+ */
+import { STATES } from '../data/site';
+import FormGuards from './FormGuards.astro';
+
+interface Props {
+  id?: string;
+  heading?: string;
+  intro?: string;
+}
+const { id = 'partner-form', heading, intro } = Astro.props;
+---
+<div id={id} class="scroll-mt-24">
+  {heading && <h2 class="mb-2">{heading}</h2>}
+  {intro && <p class="text-ink-2 mb-6 max-w-prose">{intro}</p>}
+  <form class="ae-form card grid gap-5" method="POST" novalidate>
+    <input type="hidden" name="_subject" value="Alan Estate: partner enquiry" />
+    <input type="hidden" name="_template" value="table" />
+    <input type="hidden" name="_captcha" value="false" />
+    <input type="hidden" name="segment" value="professionals" />
+    <input type="hidden" name="page" value={Astro.url.pathname} />
+    <input type="hidden" name="referrer" value="" data-fill="referrer" />
+    <input type="hidden" name="utm" value="" data-fill="utm" />
+    <FormGuards id={id} />
+
+    <div class="grid gap-5 sm:grid-cols-2">
+      <div class="field">
+        <label class="label" for={`${id}-name`}>Your name</label>
+        <input class="input" id={`${id}-name`} name="name" type="text" autocomplete="name" required />
+      </div>
+      <div class="field">
+        <label class="label" for={`${id}-org`}>Organisation</label>
+        <input class="input" id={`${id}-org`} name="organisation" type="text" autocomplete="organization" required />
+      </div>
+      <div class="field">
+        <label class="label" for={`${id}-type`}>What kind of organisation?</label>
+        <select class="select" id={`${id}-type`} name="organisation_type" required>
+          <option value="">Choose…</option>
+          <option>Funeral home</option>
+          <option>Aged care provider</option>
+          <option>SMSF accountant or administrator</option>
+          <option>Financial adviser</option>
+          <option>Estate or succession lawyer</option>
+          <option>Public trustee or trustee company</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="field">
+        <label class="label" for={`${id}-state`}>State or territory</label>
+        <select class="select" id={`${id}-state`} name="state" required>
+          <option value="">Choose…</option>
+          {STATES.map((s) => <option value={s.code}>{s.name}</option>)}
+          <option value="National">National</option>
+        </select>
+      </div>
+      <div class="field sm:col-span-2">
+        <label class="label" for={`${id}-volume`}>Roughly how many families or SMSF clients do you work with a year?</label>
+        <select class="select" id={`${id}-volume`} name="volume">
+          <option value="">Prefer not to say</option>
+          <option>Under 50</option>
+          <option>50 to 200</option>
+          <option>200 to 500</option>
+          <option>More than 500</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label" for={`${id}-email`}>Work email</label>
+      <input class="input" id={`${id}-email`} name="email" type="email" autocomplete="email" inputmode="email" required aria-describedby={`${id}-email-help`} />
+      <p class="help" id={`${id}-email-help`}>We'll use this to reply and to send occasional updates about Alan Estate.</p>
+      <p class="error-text" data-error hidden>Please enter a valid email address so we can reach you.</p>
+    </div>
+
+    <div class="field">
+      <label class="label" for={`${id}-note`}>What's the biggest gap you see for the families or clients you work with? <span class="text-ink-3 font-normal">(optional)</span></label>
+      <textarea class="textarea" id={`${id}-note`} name="note" rows="3"></textarea>
+    </div>
+
+    <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+      <button type="submit" class="btn btn-primary" data-submit>
+        <span data-label>Request a conversation</span>
+      </button>
+    </div>
+    <div class="note note-green" data-success hidden role="status" aria-live="polite" tabindex="-1">
+      <p class="font-semibold">Thanks, we have your details.</p>
+      <p class="text-ink-2 mt-1">We'll be in touch within two working days.</p>
+    </div>
+    <div class="note" style="border-left-color: var(--color-error)" data-failure hidden role="alert">
+      <p class="font-semibold">That didn't go through.</p>
+      <p class="text-ink-2 mt-1">Please try again in a moment, or use the <a class="underline" href="/contact/">contact page</a>.</p>
+    </div>
+  </form>
+</div>
+<script>
+  import { enhanceForms } from '../scripts/forms';
+  enhanceForms();
+</script>

@@ -1,67 +1,134 @@
 ---
 import Base from '../layouts/Base.astro';
-import WaitlistForm from '../components/WaitlistForm.astro';
+import PartnerForm from '../components/PartnerForm.astro';
+import EstateRecord from '../components/mockups/EstateRecord.astro';
+import ExecutorPlan from '../components/mockups/ExecutorPlan.astro';
+import PracticeView from '../components/mockups/PracticeView.astro';
 ---
-<Base title="For professionals" description="For funeral directors, aged care providers, SMSF accountants and advisers: what Alan Estate is building, and the founding partner pilot in Victoria.">
-  <section class="container-x pt-16 pb-12 md:pt-24 md:pb-16">
-    <div class="max-w-3xl">
-      <p class="eyebrow mb-5">For professionals</p>
-      <h1>You see the gap every week. We are building what goes in it.</h1>
-      <p class="lede mt-6">A family leaves the arrangement room, or the annual review, with a folder and no clear idea of what happens next. Funeral directors, aged care providers, SMSF accountants and advisers each see one part of that problem and none can reasonably solve it alone. Alan Estate is built to sit between you and the family: they get a sequenced path through the administration, and you get to be the one who pointed them to it.</p>
-      <div class="mt-8 flex flex-wrap gap-3">
-        <a href="#pilot" class="btn btn-primary">The founding partner pilot</a>
-        <a href="#waitlist" class="btn btn-secondary">Register interest</a>
+<Base title="For professionals" description="Alan Estate is building one shared record for an estate, connecting the person planning ahead, their executor and their professional advisers. Founding partner places are open in Victoria.">
+  <section class="container-x pt-16 pb-14 md:pt-24 md:pb-20">
+    <div class="grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:items-center">
+      <div class="max-w-2xl">
+        <p class="eyebrow mb-5">For professionals</p>
+        <h1>One shared record for every estate, from planning to final distribution.</h1>
+        <p class="lede mt-6">Alan Estate connects the person planning ahead, the family who will administer the estate, and the professionals who advise them. Everyone works from the same record of what exists, where it is and what happens next. We're building it now with a small group of founding partners in Victoria.</p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="#partner" class="btn btn-primary">Become a founding partner</a>
+          <a href="#how" class="btn btn-secondary">See how it works</a>
+        </div>
+      </div>
+      <div class="lg:rotate-1 max-w-md w-full lg:justify-self-end">
+        <EstateRecord />
       </div>
     </div>
   </section>
 
   <section class="border-t border-line bg-paper-2">
-    <div class="container-x py-16 md:py-20 grid gap-6 lg:grid-cols-3">
-      <div class="card flex flex-col">
-        <p class="eyebrow mb-3">Funeral homes and aged care</p>
-        <h2 class="text-[1.35rem]">Aftercare you can actually hand over</h2>
-        <ul class="mt-4 space-y-3 text-ink-2 text-[0.97rem] flex-1">
-          <li><strong class="text-ink">A card, not a pitch.</strong> Families get a plain card with a link. They open it when they are ready, usually after the funeral, when the administration starts to pile up.</li>
-          <li><strong class="text-ink">The free guide, day one.</strong> Every family you serve can use the plan builder on this site today. No sign-up, no cost, nothing for your staff to manage.</li>
-          <li><strong class="text-ink">The full product, when it's ready.</strong> A personalised plan, drafted letters and answers for the whole estate, with your name on the referral and simple commercial terms disclosed to the family.</li>
-          <li><strong class="text-ink">Nothing for you to run.</strong> No login you have to check, no reporting you have to do. A monthly note on how many families used it and what they said.</li>
-        </ul>
+    <div class="container-x py-16 md:py-20">
+      <div class="max-w-3xl mb-10">
+        <p class="eyebrow mb-4">The problem</p>
+        <h2>Today an estate is spread across paperwork, inboxes and one person's memory.</h2>
       </div>
-      <div class="card flex flex-col">
-        <p class="eyebrow mb-3">SMSF accountants and administrators</p>
-        <h2 class="text-[1.35rem]">The nomination problem, tracked across the book</h2>
-        <ul class="mt-4 space-y-3 text-ink-2 text-[0.97rem] flex-1">
-          <li><strong class="text-ink">Every client's death benefit nomination in one view.</strong> Signed date, whether the deed makes it lapsing or non-lapsing, expiry where it applies, who is nominated, and whether it has been reviewed since circumstances changed.</li>
-          <li><strong class="text-ink">Alerts with the client email already drafted.</strong> Six months, three months, one month. You review, you send. The same conversation you would have anyway, just never missed.</li>
-          <li><strong class="text-ink">An audit trail.</strong> If a family ever asks "did anyone know?", the answer is a dated log, not a memory.</li>
-          <li><strong class="text-ink">A clean handover when a member dies.</strong> The executor arrives with the fund's trust deed, trustee structure and contacts already known, and follows a step-by-step SMSF path that keeps them within the ATO's timeframes, escalating to you or a specialist where it should.</li>
-        </ul>
-      </div>
-      <div class="card flex flex-col">
-        <p class="eyebrow mb-3">Advisers and estate lawyers</p>
-        <h2 class="text-[1.35rem]">Execution for the conversations you already have</h2>
-        <ul class="mt-4 space-y-3 text-ink-2 text-[0.97rem] flex-1">
-          <li><strong class="text-ink">A record clients will actually complete.</strong> Twenty minutes, prompted, with a yearly check-in, so the estate plan you designed is findable when it matters.</li>
-          <li><strong class="text-ink">Better-prepared executors.</strong> Families come to you with the map already drawn and the routine notifications done, so your time goes to the work that needs you.</li>
-          <li><strong class="text-ink">Clear escalation.</strong> When a matter needs a lawyer, whether a contested will, a disputed death benefit or a complex wind-up, the product says so and refers on. We would like that referral to go to people we trust.</li>
-        </ul>
+      <div class="grid gap-6 md:grid-cols-3">
+        {[
+          ['The nomination nobody checked', 'A binding death benefit nomination lapses, or names someone who no longer qualifies. The family and the accountant find out after the death, when it can no longer be fixed.'],
+          ['The executor starting from nothing', 'They ring each institution separately, post the same certified copies again and again, and miss deadlines nobody told them about.'],
+          ['The adviser who hears last', 'The accountant, lawyer or planner learns of the death weeks later, and spends the first meeting rebuilding information the client already had.'],
+        ].map(([h, p]) => (
+          <div class="card"><h3 class="text-[1.2rem]">{h}</h3><p class="mt-2 text-ink-2 text-[0.97rem]">{p}</p></div>
+        ))}
       </div>
     </div>
   </section>
 
-  <section id="pilot" class="border-t border-line scroll-mt-20">
+  <section id="how" class="border-t border-line scroll-mt-20">
+    <div class="container-x py-16 md:py-20">
+      <div class="max-w-3xl mb-12">
+        <p class="eyebrow mb-4">How it works</p>
+        <h2>Three stages, one record.</h2>
+      </div>
+      <div class="grid gap-16 md:gap-20">
+        <div class="grid gap-8 lg:grid-cols-2 lg:gap-16 lg:items-center">
+          <div>
+            <p class="num text-xl mb-2">01 · Before</p>
+            <h3 class="text-[1.5rem]">A current record, kept current</h3>
+            <p class="mt-3 text-ink-2">The person, or their adviser on their behalf, records where everything is: accounts, super, the will, the trust deed, insurance and who to call. Death benefit nominations are tracked with their renewal dates, and reminders go out well before anything lapses. Up to three trusted people receive a handover when the time comes.</p>
+          </div>
+          <div class="max-w-md w-full"><EstateRecord /></div>
+        </div>
+        <div class="grid gap-8 lg:grid-cols-2 lg:gap-16 lg:items-center">
+          <div class="lg:order-2">
+            <p class="num text-xl mb-2">02 · After</p>
+            <h3 class="text-[1.5rem]">A plan the executor can follow</h3>
+            <p class="mt-3 text-ink-2">When a death is registered, the record becomes a step-by-step plan for the executor, built for their state and the estate's structure. Letters to banks, funds and agencies are drafted from what's already on file. Deadlines, including the ATO's SMSF timeframes, are flagged early.</p>
+          </div>
+          <div class="max-w-md w-full lg:order-1 lg:justify-self-start"><ExecutorPlan /></div>
+        </div>
+        <div class="grid gap-8 lg:grid-cols-2 lg:gap-16 lg:items-center">
+          <div>
+            <p class="num text-xl mb-2">03 · Together</p>
+            <h3 class="text-[1.5rem]">Everyone sees what they need</h3>
+            <p class="mt-3 text-ink-2">With the family's consent, their professionals see where the estate is up to and what's waiting on them. When a matter needs a lawyer or SMSF specialist, the plan says so and refers the family on, to you if they came from you.</p>
+          </div>
+          <div class="max-w-md w-full"><PracticeView /></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-t border-line bg-paper-2">
+    <div class="container-x py-16 md:py-20">
+      <div class="max-w-3xl mb-10">
+        <p class="eyebrow mb-4">For your practice</p>
+      </div>
+      <div class="grid gap-6 lg:grid-cols-3">
+        <div class="card flex flex-col">
+          <p class="eyebrow mb-3">Funeral homes and aged care</p>
+          <h2 class="text-[1.35rem]">Aftercare you can hand over</h2>
+          <ul class="mt-4 space-y-3 text-ink-2 text-[0.97rem] flex-1">
+            <li><strong class="text-ink">A card to hand over.</strong> Families get a plain card with a link. They open it when they are ready, usually after the funeral, when the administration starts to pile up.</li>
+            <li><strong class="text-ink">The free plan, from day one.</strong> Every family you serve can use the plan on this site today. No sign-up, no cost, nothing for your staff to manage.</li>
+            <li><strong class="text-ink">The full platform, as it opens.</strong> A personalised plan, drafted letters and answers for the whole estate, with your name on the referral and simple commercial terms disclosed to the family.</li>
+            <li><strong class="text-ink">Nothing for you to run.</strong> No login you have to check, no reporting you have to do. A monthly note on how many families used it and what they said.</li>
+          </ul>
+        </div>
+        <div class="card flex flex-col">
+          <p class="eyebrow mb-3">SMSF accountants and administrators</p>
+          <h2 class="text-[1.35rem]">Every client's nomination, tracked</h2>
+          <ul class="mt-4 space-y-3 text-ink-2 text-[0.97rem] flex-1">
+            <li><strong class="text-ink">Every client's death benefit nomination in one view.</strong> Signed date, whether the deed makes it lapsing or non-lapsing, expiry where it applies, who is nominated, and whether it has been reviewed since circumstances changed.</li>
+            <li><strong class="text-ink">Alerts with the client email already drafted.</strong> Six months, three months, one month. You review and you send. It's the same conversation you would have anyway, and it doesn't get missed.</li>
+            <li><strong class="text-ink">An audit trail.</strong> If a family ever asks "did anyone know?", the answer is a dated log.</li>
+            <li><strong class="text-ink">A clean handover when a member dies.</strong> The executor arrives with the fund's trust deed, trustee structure and contacts already known, and follows a step-by-step SMSF path that keeps them within the ATO's timeframes, escalating to you or a specialist where it should.</li>
+          </ul>
+        </div>
+        <div class="card flex flex-col">
+          <p class="eyebrow mb-3">Advisers and estate lawyers</p>
+          <h2 class="text-[1.35rem]">Your advice, carried through</h2>
+          <ul class="mt-4 space-y-3 text-ink-2 text-[0.97rem] flex-1">
+            <li><strong class="text-ink">A record clients complete.</strong> Twenty minutes, prompted, with a yearly check-in, so the estate plan you designed can be found when it matters.</li>
+            <li><strong class="text-ink">Better-prepared executors.</strong> Families come to you with the map already drawn and the routine notifications done, so your time goes to the work that needs you.</li>
+            <li><strong class="text-ink">Clear referral.</strong> When a matter needs a lawyer, whether a contested will, a disputed death benefit or a complex wind-up, the plan says so and refers on. We would like that referral to go to people we trust.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="partner" class="border-t border-line scroll-mt-20">
     <div class="container-x py-16 md:py-20 grid gap-10 lg:grid-cols-[1fr_1.3fr] lg:gap-16">
       <div>
-        <p class="eyebrow mb-4">Founding partner pilot · Victoria</p>
-        <h2>A small group of practices and homes who help us get it right.</h2>
-        <p class="mt-4 text-ink-2">We would rather build with ten partners than sell to a hundred. The pilot is free, time-boxed, and shaped by what you tell us.</p>
+        <p class="eyebrow mb-4">Founding partners · Victoria</p>
+        <h2>Help shape it, and be first to offer it to your clients.</h2>
+        <p class="mt-4 text-ink-2">We're working with a small group of SMSF practices, funeral homes and aged care providers in Victoria. Partners use the platform with real clients before anyone else, and their feedback decides what we build next.</p>
+        <p class="mt-6"><a href="#partner-form" class="btn btn-primary">Request a conversation</a></p>
       </div>
       <div class="grid gap-4 sm:grid-cols-2">
         {[
-          ['Who', 'Around ten SMSF practices and three to five funeral homes or aged care providers, Victoria first. Independent, owner-led, already referring families to someone.'],
-          ['What you get', 'Free access for the pilot period, onboarding done with you in person or on a call, and direct input into what gets built next. First look at everything.'],
-          ['What we ask', 'Use it with real families or clients. Tell us honestly what works and what does not. If it is good, let us say you were part of it.'],
-          ['What it is not', 'No contract to sign up front, no exclusivity, no obligation to continue. Commercial terms come after the pilot, once both of us have seen it work.'],
+          ['Who', 'Around ten SMSF practices and three to five funeral homes or aged care providers. Independent, owner-led, and already referring families to someone.'],
+          ['What you get', 'Free access throughout the pilot, onboarding with you in person or by video, and a direct say in what we build. Your name on the referral when families come from you.'],
+          ['What we ask', "Use it with real clients and tell us what works and what doesn't. If it helps, let us name you as a founding partner."],
+          ['Terms', "No contract up front, no exclusivity and no obligation to continue. We agree commercial terms after the pilot, once you've seen it working."],
         ].map(([h, p]) => (
           <div class="card-paper"><h3 class="text-[1.15rem]">{h}</h3><p class="mt-2 text-ink-2 text-[0.95rem]">{p}</p></div>
         ))}
@@ -72,13 +139,13 @@ import WaitlistForm from '../components/WaitlistForm.astro';
   <section class="border-t border-line bg-paper-2">
     <div class="container-x py-14 md:py-16">
       <div class="max-w-3xl">
-        <p class="eyebrow mb-4">Straight answers</p>
+        <p class="eyebrow mb-4">Questions</p>
         <div class="grid gap-6 sm:grid-cols-2">
           {[
-            ['Is this legal advice?', 'No. It is general information and administrative help, sourced to official guidance, with clear escalation to a professional when a matter needs one. We are engaging specialist SMSF and estate reviewers for the knowledge base before the product launches, and we will tell partners exactly who they are.'],
-            ['Where is the data?', 'Australian-hosted, encrypted in transit and at rest, deleted when a family asks. We do not store passwords. Partners see activation and progress, never the contents of a family\'s estate without their consent.'],
+            ['Is this legal advice?', "No. It's general information and administrative help, sourced to official guidance, with clear referral to a professional when a matter needs one. Specialist SMSF and estate practitioners will review the knowledge base before families use it, and partners will know who they are."],
+            ['Where is the data?', "Australian-hosted, encrypted in transit and at rest, and deleted when a family asks. We don't store passwords. Partners see activation and progress, and only see the contents of a family's estate with their consent."],
             ['Does it compete with me?', 'No. It handles the routine administration that does not need a professional, and refers the rest to you if the family came from you.'],
-            ['What does it cost a firm?', 'Nothing during the pilot. After that we will price it as a professional tool, not a consumer app, and we would like your view on what it is worth to your practice before we set it.'],
+            ['What does it cost a firm?', "Nothing during the pilot. Afterwards it will be priced as a professional tool, and we'll ask our founding partners what it's worth to their practice before we set the price."],
           ].map(([q, a]) => (
             <div><h3 class="text-[1.15rem]">{q}</h3><p class="mt-2 text-ink-2 text-[0.95rem]">{a}</p></div>
           ))}
@@ -89,7 +156,7 @@ import WaitlistForm from '../components/WaitlistForm.astro';
 
   <section class="container-x py-16 md:py-20">
     <div class="max-w-2xl">
-      <WaitlistForm variant="professionals" heading="Register interest" intro="Tell us who you are and what you see. We will reply personally, usually within a couple of days." />
+      <PartnerForm id="partner-form" heading="Request a conversation" intro="Tell us about your practice and what you see with clients. We'll reply personally within two working days." />
     </div>
   </section>
 </Base>

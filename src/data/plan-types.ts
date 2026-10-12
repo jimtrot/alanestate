@@ -3,7 +3,7 @@ import type { StateCode } from './site';
 export type Phase = 'now' | 'weeks' | 'month' | 'months' | 'closing';
 
 export const PHASES: { id: Phase; title: string; when: string; note: string }[] = [
-  { id: 'now', title: 'The first days', when: 'Now', note: 'Only a few things genuinely need to happen straight away. The rest can wait until after the funeral.' },
+  { id: 'now', title: 'The first days', when: 'Now', note: 'Only a few things need to happen straight away. The rest can wait until after the funeral.' },
   { id: 'weeks', title: 'The first two weeks', when: 'Weeks 1–2', note: 'Get the death certificate and certified copies, then start telling the institutions that have deadlines.' },
   { id: 'month', title: 'The first month', when: 'Weeks 2–6', note: 'Build the picture of the estate, decide whether you need probate, and stay inside the deadlines that matter.' },
   { id: 'months', title: 'Months two to six', when: 'Months 2–6', note: 'Probate, collecting assets, paying debts, and the waiting periods that protect you as executor.' },

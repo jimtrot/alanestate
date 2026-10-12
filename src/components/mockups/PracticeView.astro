@@ -1,0 +1,30 @@
+---
+import MockWindow from './MockWindow.astro';
+interface Props { class?: string }
+const { class: extra = '' } = Astro.props;
+const clients = [
+  { name: 'J. & M. Harris', nom: 'Binding, non-lapsing', cls: 'tag-green', status: 'Valid' },
+  { name: 'L. Okafor', nom: 'Binding, lapsing', cls: 'tag-ochre', status: 'Lapses in 64 days' },
+  { name: 'T. Brennan', nom: 'None on file', cls: 'tag-error', status: 'No binding nomination' },
+  { name: 'Estate of P. Nguyen', nom: '—', cls: '', status: 'Executor: step 14 of 38' },
+];
+---
+<MockWindow class={extra} title="Patel Advisory · Clients" summary="Illustration of an accountant's client list showing each client's death benefit nomination and its status, with one nomination lapsing in 64 days and a reminder drafted for review.">
+  <div class="grid grid-cols-[1.1fr_1fr] @md:grid-cols-[1.2fr_1fr_1.2fr] gap-x-3 px-0.5 pb-1.5 text-ink-3 text-[0.75rem] font-semibold uppercase tracking-wide">
+    <span>Client</span><span>Nomination<span class="@md:hidden"> and status</span></span><span class="hidden @md:inline">Status</span>
+  </div>
+  <ul class="m-0 p-0 list-none">
+    {clients.map((c) => (
+      <li class="grid grid-cols-[1.1fr_1fr] @md:grid-cols-[1.2fr_1fr_1.2fr] gap-x-3 gap-y-1 items-start py-2 border-t border-line px-0.5">
+        <span class="font-semibold">{c.name}</span>
+        <span class="contents @md:contents">
+          <span class="text-ink-3 col-start-2 @md:col-start-auto">{c.nom}</span>
+          <span class="col-start-2 @md:col-start-auto justify-self-start"><span class={`tag ${c.cls}`} style="white-space:normal">{c.status}</span></span>
+        </span>
+      </li>
+    ))}
+  </ul>
+  <div class="mt-2 note !py-2.5 !px-3 text-[0.8125rem]">
+    <p><span class="font-semibold">Reminder drafted for L. Okafor</span> <span class="text-ink-3">·</span> Review and send</p>
+  </div>
+</MockWindow>

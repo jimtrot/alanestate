@@ -1,0 +1,21 @@
+---
+const guides = [
+  { href: '/guide/', title: 'Build your plan', desc: 'Answer six questions and get a step-by-step plan for your state and situation. Tick things off as you go, then print or download it.', cta: 'Build your plan' },
+  { href: '/guide/first-days/', title: 'The first days', desc: 'Who certifies the death, what the funeral director handles, where to look for the will, and what can wait.', cta: 'Read the guide' },
+  { href: '/guide/certified-copies/', title: 'Certified copies', desc: 'Who can certify documents in your state, how many copies to get, and how to avoid doing it twice.', cta: 'Read the guide' },
+  { href: '/guide/who-to-notify/', title: 'Who to notify', desc: 'Government, banks, super funds, insurers, utilities and subscriptions, and the free service that notifies several at once.', cta: 'Read the guide' },
+  { href: '/guide/finding-the-money/', title: 'Finding the money', desc: 'Lost super, share registries, unclaimed money and managed funds, including when the records are out of date.', cta: 'Read the guide' },
+  { href: '/guide/smsf/', title: 'When there is an SMSF', desc: 'The 28-day and six-month deadlines, what the surviving trustee must do, and how the fund is wound up.', cta: 'Read the guide' },
+  { href: '/guide/probate/', title: 'Probate, state by state', desc: 'When you need probate, how long it takes, and what the court in your state asks for.', cta: 'Read the guide' },
+  { href: '/bdbn-check/', title: 'Super nomination check', desc: 'A two-minute check of whether a superannuation death benefit nomination is still valid.', cta: 'Check a nomination' },
+];
+---
+<div class="grid gap-px bg-line border border-line rounded-lg overflow-hidden sm:grid-cols-2 lg:grid-cols-4">
+  {guides.map((g) => (
+    <a href={g.href} class="bg-white p-6 md:p-7 no-underline group hover:bg-green-tint transition-colors flex flex-col">
+      <h3 class="group-hover:text-green transition-colors">{g.title}</h3>
+      <p class="mt-2 text-ink-2 text-[0.97rem] flex-1">{g.desc}</p>
+      <p class="mt-4 text-green font-semibold text-sm">{g.cta} <span aria-hidden="true">→</span></p>
+    </a>
+  ))}
+</div>

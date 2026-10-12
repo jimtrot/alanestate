@@ -1,0 +1,29 @@
+---
+/**
+ * Decorative "app window" frame for the professionals page mockups.
+ * Pure HTML/CSS. The window is hidden from screen readers; `summary` is read instead.
+ */
+interface Props {
+  title: string;
+  summary: string;
+  class?: string;
+}
+const { title, summary, class: extra = '' } = Astro.props;
+---
+<figure class={`m-0 @container ${extra}`}>
+  <p class="sr-only">{summary}</p>
+  <div aria-hidden="true" class="bg-white border border-line rounded-xl overflow-hidden shadow-[0_1px_0_rgba(28,26,23,0.04),0_18px_40px_-18px_rgba(28,26,23,0.28)] font-sans text-[0.875rem] leading-snug text-ink">
+    <div class="flex items-center gap-3 px-3.5 py-2.5 border-b border-line bg-paper">
+      <span class="flex gap-1.5 shrink-0">
+        <span class="w-2.5 h-2.5 rounded-full bg-line-2"></span>
+        <span class="w-2.5 h-2.5 rounded-full bg-line-2"></span>
+        <span class="w-2.5 h-2.5 rounded-full bg-line-2"></span>
+      </span>
+      <span class="text-ink-3 text-[0.8125rem] font-semibold truncate">{title}</span>
+    </div>
+    <div class="p-3.5 sm:p-4">
+      <slot />
+    </div>
+  </div>
+  <figcaption class="mt-2.5 text-xs text-ink-3">Illustrative preview. Names and details are fictional.</figcaption>
+</figure>

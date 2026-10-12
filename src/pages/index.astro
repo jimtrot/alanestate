@@ -1,6 +1,8 @@
 ---
 import Base from '../layouts/Base.astro';
 import { SITE } from '../data/site';
+import GuideList from '../components/GuideList.astro';
+import UpdatesForm from '../components/UpdatesForm.astro';
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
@@ -13,16 +15,16 @@ const jsonLd = {
 <Base title="Alan Estate" jsonLd={jsonLd}>
   <!-- Hero -->
   <section class="container-x pt-16 pb-14 md:pt-24 md:pb-20">
-    <div class="grid gap-12 lg:grid-cols-[1.15fr_1fr] lg:items-end">
+    <div class="grid gap-12 lg:grid-cols-[1.15fr_1fr] lg:items-center">
       <div class="max-w-2xl">
         <p class="eyebrow mb-5">When someone dies in Australia</p>
         <h1>There are around forty things to do after a death. This is the order they happen in.</h1>
-        <p class="lede mt-6">Alan Estate is a free, step-by-step plan for the weeks and months after a death in Australia. It is personalised to your state, the will, superannuation and any self-managed super fund, and every step links to its official source.</p>
+        <p class="lede mt-6">Answer six questions and get a step-by-step plan for your state and situation, covering the will, superannuation, property and any self-managed super fund. Every step links to its official source.</p>
         <div class="mt-8 flex flex-col sm:flex-row gap-3">
-          <a href="/guide/" class="btn btn-primary">Build your free plan</a>
-          <a href="/guide/first-days/" class="btn btn-secondary">Start with the first days</a>
+          <a href="/guide/" class="btn btn-primary">Build your plan</a>
+          <a href="/guides/" class="btn btn-secondary">Read the guides</a>
         </div>
-        <p class="mt-5 text-sm text-ink-3">No account. No payment. Nothing stored unless you ask us to email it to you.</p>
+        <p class="mt-5 text-sm text-ink-3">Free. No account. Your answers stay in your browser.</p>
       </div>
       <div class="card-paper relative overflow-hidden">
         <p class="eyebrow mb-4">How the plan is sequenced</p>
@@ -44,83 +46,58 @@ const jsonLd = {
     </div>
   </section>
 
+
+  <!-- Guides -->
+  <section class="container-x py-16 md:py-20">
+    <div class="max-w-2xl mb-10">
+      <p class="eyebrow mb-4">Guides</p>
+      <h2>What to do, in the order you'll need it</h2>
+      <p class="lede mt-4">Read the guides in order, or go straight to the part you're dealing with.</p>
+    </div>
+    <GuideList />
+  </section>
+
   <!-- Why -->
   <section class="border-t border-line bg-paper-2">
     <div class="container-x py-16 md:py-20 grid gap-10 lg:grid-cols-[1fr_1.3fr] lg:gap-16">
       <div>
         <p class="eyebrow mb-4">Why this exists</p>
-        <h2>A will says who inherits. It does not say where anything is, or who has to be told.</h2>
+        <h2>A will says who inherits. It doesn't say where anything is, or who has to be told.</h2>
       </div>
       <div class="prose text-ink-2">
-        <p>Around 187,000 people die in Australia each year, and roughly two thirds of them are over 75. That is the group most likely to leave superannuation, property and a self-managed fund behind. The Australian Taxation Office's own expectation is that finalising an estate takes six to twelve months. In practice, families routinely spend longer than that.</p>
-        <p>The reason is rarely the law. It is that the work arrives all at once, with no sequence and no single source of truth. Every institution asks for its own form and its own certified copies. Superannuation sits outside the will and follows different rules again. Deadlines exist but are not announced. And the person doing the work is usually doing it for the first time, while grieving.</p>
-        <p>Alan Estate was started by people who have administered an estate and found that nobody hands you the list. So we wrote it: the order of operations, what each step requires, who to contact, and where the costly mistakes are. The guide on this site is free and stays free.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- What's in the guide -->
-  <section class="container-x py-16 md:py-20">
-    <div class="max-w-2xl mb-10">
-      <p class="eyebrow mb-4">The free guide</p>
-      <h2>Everything a first-time executor needs to know, in the order it happens.</h2>
-    </div>
-    <div class="grid gap-px bg-line border border-line rounded-lg overflow-hidden sm:grid-cols-2 lg:grid-cols-3">
-      {[
-        ['/guide/', 'Build your plan', 'Answer six questions and get a sequenced checklist for your situation: state, will, super, property, SMSF. Tick things off, print it, or email it to yourself.'],
-        ['/guide/first-days/', 'The first days', 'Who certifies the death, what the funeral director handles, where to look for the will, and what not to rush.'],
-        ['/guide/certified-copies/', 'Certified copies', 'The most frustrating part of the whole process. Who can certify in your state, how many copies to get, and how to avoid doing it three times.'],
-        ['/guide/who-to-notify/', 'Who to notify', 'Government, banks, super, insurers, utilities and subscriptions, plus the free government service that tells many of them at once.'],
-        ['/guide/finding-the-money/', 'Finding the money', 'Lost super, share registries, unclaimed money, managed funds, and what to do when the records are out of date.'],
-        ['/guide/smsf/', 'When there is an SMSF', 'The 28-day and six-month deadlines, what the surviving trustee must do, why the nomination matters, and how to wind the fund up.'],
-      ].map(([href, title, desc]) => (
-        <a href={href} class="bg-white p-6 md:p-7 no-underline group hover:bg-green-tint transition-colors">
-          <h3 class="group-hover:text-green transition-colors">{title}</h3>
-          <p class="mt-2 text-ink-2 text-[0.97rem]">{desc}</p>
-          <p class="mt-4 text-green font-semibold text-sm">Read the guide <span aria-hidden="true">→</span></p>
-        </a>
-      ))}
-    </div>
-  </section>
-
-  <!-- Two audiences -->
-  <section class="border-t border-line">
-    <div class="container-x py-16 md:py-20">
-      <div class="max-w-2xl mb-10">
-        <p class="eyebrow mb-4">What we're building</p>
-        <h2>The guide is free today. The product comes next.</h2>
-        <p class="lede mt-4">Two tools built on the same principle. An executor should never have to start from nothing.</p>
-      </div>
-      <div class="grid gap-6 md:grid-cols-2">
-        <div class="card flex flex-col">
-          <p class="eyebrow mb-3">For families</p>
-          <h3>Your plan, your documents, one place</h3>
-          <p class="mt-3 text-ink-2 flex-1">After a death: a personalised plan, drafted letters to every institution, and plain-English answers. Before: a simple record of where everything is, covering accounts, super, and the nomination and its renewal date, with a handover to the people you choose when the time comes.</p>
-          <a href="/families/" class="btn btn-secondary mt-6 self-start">See what's coming for families</a>
-        </div>
-        <div class="card flex flex-col">
-          <p class="eyebrow mb-3">For professionals</p>
-          <h3>Send families somewhere good</h3>
-          <p class="mt-3 text-ink-2 flex-1">Funeral directors, aged care providers, SMSF accountants and advisers see the same gap every week: a family leaves the room with a folder and no clear idea of what happens next. We are building the thing you can hand them, and for SMSF practices, the nomination tracking that catches the worst case early.</p>
-          <a href="/professionals/" class="btn btn-secondary mt-6 self-start">See the founding partner pilot</a>
-        </div>
+        <p>Around 187,000 people die in Australia each year, and roughly two thirds of them are over 75. Many leave superannuation, property and sometimes a self-managed super fund. The Australian Taxation Office expects most estates to take six to twelve months to finalise, and many take longer.</p>
+        <p>Most of that time goes on administration. Every bank, fund and agency asks for its own forms and certified copies. Superannuation follows different rules from the will. Some deadlines are strict and nobody announces them. And the executor is usually doing all of it for the first time, while grieving.</p>
+        <p>Alan Estate was started by people who have administered an estate themselves. We wrote down the order of things, what each step needs, who to contact and where the expensive mistakes happen, and made it free to use.</p>
       </div>
     </div>
   </section>
 
   <!-- Principles -->
-  <section class="border-t border-line bg-paper-2">
+  <section class="border-t border-line">
     <div class="container-x py-16 md:py-20 grid gap-10 md:grid-cols-3">
       {[
-        ['General information, sourced', 'Every step links to the official source: the court, the ATO, Services Australia, or your state registry. Where rules differ by state, we say so. Where we are not sure, we say that too.'],
-        ['Unhurried by design', 'Most of this can wait until after the funeral. The plan tells you what genuinely cannot, and leaves the rest until you are ready.'],
-        ['Nothing to sign up for', 'The guide runs in your browser. We do not store what you enter unless you ask us to email you a copy.'],
+        ['Sourced, and clear about limits', 'Every step links to the official source: the court, the ATO, Services Australia or your state registry. Where the rules differ by state, we say so. Where a matter needs a professional, we say that too.'],
+        ['At your pace', "Most of this can wait until after the funeral. The plan shows the few things that can't, and holds the rest until you're ready."],
+        ['Private by default', "The plan runs in your browser. There's no account, and we don't see your answers."],
       ].map(([h, p]) => (
         <div>
           <h3 class="text-[1.2rem]">{h}</h3>
           <p class="mt-2 text-ink-2">{p}</p>
         </div>
       ))}
+    </div>
+  </section>
+
+  <!-- What we're building -->
+  <section id="updates" class="border-t border-line bg-paper-2 scroll-mt-20">
+    <div class="container-x py-16 md:py-20 grid gap-10 lg:grid-cols-2 lg:gap-16">
+      <div>
+        <p class="eyebrow mb-4">What we're building</p>
+        <h2>One place for the whole estate, shared by the family and their advisers.</h2>
+        <p class="mt-4 text-ink-2">We're building the Alan Estate platform: a single, current record of what a person owns and who to call, kept up to date while they're alive, and turned into a step-by-step plan for their executor when they die. Their accountant, lawyer or funeral director can see what they need, when the family allows it.</p>
+        <p class="mt-6"><a href="/professionals/" class="btn btn-secondary">For professionals: become a founding partner</a></p>
+      </div>
+      <UpdatesForm heading="Keep me updated" intro="We'll email you when the platform opens to families. Occasional updates only, and you can unsubscribe at any time." source="home" />
     </div>
   </section>
 </Base>

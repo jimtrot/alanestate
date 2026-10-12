@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import PlanBuilder from '../../islands/PlanBuilder';
+import UpdatesForm from '../../components/UpdatesForm.astro';
 import { PHASES } from '../../data/plan-types';
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -10,17 +11,23 @@ const jsonLd = {
   step: PHASES.map((p) => ({ '@type': 'HowToSection', name: p.title, text: p.note })),
 };
 ---
-<Base title="What to do when someone dies in Australia" description="A free, personalised, step-by-step plan for the weeks and months after a death in Australia, by state, with or without a will, covering super, property and SMSF steps. Tick things off, print it, email it to yourself." jsonLd={jsonLd}>
+<Base title="What to do when someone dies in Australia" description="A free, personalised, step-by-step plan for the weeks and months after a death in Australia, by state, with or without a will, covering super, property and SMSF steps. Tick things off, print it or download it." jsonLd={jsonLd}>
   <section class="container-x pt-14 pb-10 md:pt-20">
     <div class="max-w-3xl">
-      <p class="eyebrow mb-5">The guide · free, no sign-up</p>
+      <p class="eyebrow mb-5">Your plan · free, no account</p>
       <h1>What to do when someone dies in Australia</h1>
-      <p class="lede mt-6">There are around forty things to do after a death, and they have an order. This builds your list: sequenced, specific to your state and situation, with what each step needs and a link to the official source.</p>
+      <p class="lede mt-6">There are around forty things to do after a death, and they have an order. This builds your plan: sequenced, specific to your state and situation, with what each step needs and a link to the official source.</p>
     </div>
   </section>
 
   <section class="container-x pb-16">
     <PlanBuilder client:load />
+  </section>
+
+  <section class="container-x pb-16 no-print">
+    <div class="max-w-2xl">
+      <UpdatesForm compact source="plan" heading="Keep me updated" intro="We're building a version that drafts the letters for you and answers questions as they come up. We'll email you when it's available." />
+    </div>
   </section>
 
   <section class="border-t border-line bg-paper-2">

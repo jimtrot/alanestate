@@ -1,0 +1,44 @@
+---
+import MockWindow from './MockWindow.astro';
+interface Props { class?: string }
+const { class: extra = '' } = Astro.props;
+---
+<MockWindow class={extra} title="Estate of Peter Nguyen · Plan" summary="Illustration of an executor's plan with 14 of 38 steps done, grouped into the first two weeks, the first month and the SMSF steps, including a drafted letter to the bank and an ATO notice due 18 November.">
+  <div class="flex items-center justify-between gap-3 mb-1.5">
+    <span class="font-semibold">14 of 38 steps done</span>
+  </div>
+  <div class="h-1.5 rounded-full bg-paper-3 overflow-hidden mb-4">
+    <div class="h-full bg-green" style="width: 37%"></div>
+  </div>
+
+  {[
+    { phase: 'First two weeks', rows: [
+      { done: true, text: 'Death certificate ordered' },
+      { done: true, text: 'Certified copies (6)' },
+      { done: false, text: 'Notify Services Australia' },
+    ]},
+    { phase: 'First month', rows: [
+      { done: false, text: 'Letter to bank', chip: ['green', 'Draft ready'] },
+      { done: false, text: 'Check whether probate is needed (VIC)' },
+    ]},
+    { phase: 'SMSF', rows: [
+      { done: false, text: 'ATO notice', chip: ['ochre', 'ATO notice due 18 Nov'], chipOnly: true },
+      { done: false, text: 'Review trustee structure' },
+    ]},
+  ].map((b, i) => (
+    <div class={i > 0 ? 'mt-3.5' : ''}>
+      <p class="eyebrow mb-1.5" style="font-size:0.7rem">{b.phase}</p>
+      <ul class="m-0 p-0 list-none grid gap-1.5">
+        {b.rows.map((r) => (
+          <li class="flex items-start gap-2.5">
+            <span class={`mt-0.5 w-4 h-4 shrink-0 rounded-[4px] border flex items-center justify-center text-[0.7rem] leading-none ${r.done ? 'bg-green border-green text-white' : 'bg-white border-line-2'}`}>{r.done ? '✓' : ''}</span>
+            <span class="flex flex-wrap items-center gap-x-2 gap-y-1">
+              {!r.chipOnly && <span class={r.done ? 'text-ink-3' : ''}>{r.text}</span>}
+              {r.chip && <span class={`tag ${r.chip[0] === 'green' ? 'tag-green' : 'tag-ochre'}`}>{r.chip[1]}</span>}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  ))}
+</MockWindow>

@@ -10,10 +10,12 @@ interface Props {
   /** Path for canonical, e.g. "/guide/" */
   canonical?: string;
   noindex?: boolean;
+  /** Path to redirect to immediately (meta refresh), for retired pages */
+  redirectTo?: string;
   ogType?: string;
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
-const { title, description = SITE.description, canonical, noindex = false, ogType = 'website', jsonLd } = Astro.props;
+const { title, description = SITE.description, canonical, noindex = false, redirectTo, ogType = 'website', jsonLd } = Astro.props;
 const canonicalUrl = new URL(canonical ?? Astro.url.pathname, SITE.url).toString();
 const fullTitle = title === SITE.name ? `${SITE.name} — ${SITE.tagline}` : `${title} · ${SITE.name}`;
 ---
@@ -26,6 +28,7 @@ const fullTitle = title === SITE.name ? `${SITE.name} — ${SITE.tagline}` : `${
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalUrl} />
     {noindex && <meta name="robots" content="noindex" />}
+    {redirectTo && <meta http-equiv="refresh" content={`0; url=${redirectTo}`} />}
     <meta property="og:site_name" content={SITE.name} />
     <meta property="og:type" content={ogType} />
     <meta property="og:title" content={fullTitle} />

@@ -1,21 +1,20 @@
 ---
 import Base from '../layouts/Base.astro';
-import { SITE } from '../data/site';
+import FormGuards from '../components/FormGuards.astro';
 ---
 <Base title="Contact" description="Get in touch with the people building Alan Estate.">
   <section class="container-x py-16 md:py-20">
     <div class="max-w-2xl">
       <p class="eyebrow mb-4">Contact</p>
-      <h1>Say hello, ask a question, tell us what's wrong.</h1>
-      <p class="lede mt-5">We read every message. If you have spotted an error in the guide, we especially want to know.</p>
-      <form class="waitlist-form card grid gap-5 mt-8" method="POST" action={SITE.formEndpoint} data-ajax={SITE.formAjax} novalidate>
+      <h1>Get in touch</h1>
+      <p class="lede mt-5">Questions, feedback or a correction to one of the guides. We read every message and reply by email.</p>
+      <form class="ae-form card grid gap-5 mt-8" method="POST" novalidate>
         <input type="hidden" name="_subject" value="Alan Estate: contact" />
         <input type="hidden" name="_template" value="table" />
         <input type="hidden" name="_captcha" value="false" />
-        <input type="hidden" name="_next" value={`${SITE.url}/thanks/`} />
         <input type="hidden" name="segment" value="contact" />
         <input type="hidden" name="page" value="/contact/" />
-        <input type="text" name="_honey" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+        <FormGuards id="c" />
         <div class="grid gap-5 sm:grid-cols-2">
           <div class="field"><label class="label" for="c-name">Name</label><input class="input" id="c-name" name="name" type="text" autocomplete="name" /></div>
           <div class="field">
@@ -27,9 +26,9 @@ import { SITE } from '../data/site';
         <div class="field"><label class="label" for="c-msg">Message</label><textarea class="textarea" id="c-msg" name="message" rows="5" required></textarea></div>
         <div class="flex flex-col sm:flex-row sm:items-center gap-4">
           <button type="submit" class="btn btn-primary" data-submit><span data-label>Send</span></button>
-          <p class="text-sm text-ink-3">We use your email only to reply. <a href="/privacy/" class="underline">Privacy</a>.</p>
+          <p class="text-sm text-ink-3" data-consent>We use your email only to reply. <a href="/privacy/" class="underline">Privacy</a>.</p>
         </div>
-        <div class="note note-green" data-success hidden role="status" aria-live="polite"><p class="font-semibold">Thank you, we have it.</p><p class="text-ink-2 mt-1">We will reply by email.</p></div>
+        <div class="note note-green" data-success hidden role="status" aria-live="polite" tabindex="-1"><p class="font-semibold">Thanks, we've got your message.</p><p class="text-ink-2 mt-1">We'll reply by email.</p></div>
         <div class="note" style="border-left-color: var(--color-error)" data-failure hidden role="alert"><p class="font-semibold">That didn't go through.</p><p class="text-ink-2 mt-1">Please try again in a moment.</p></div>
       </form>
     </div>

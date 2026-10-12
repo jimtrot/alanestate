@@ -1,0 +1,28 @@
+---
+import MockWindow from './MockWindow.astro';
+interface Props { class?: string }
+const { class: extra = '' } = Astro.props;
+const rows: [string, string, boolean?][] = [
+  ['Will', 'Kingsley & Co Lawyers, Ballarat'],
+  ['Super', 'Ellis Family Super Fund (SMSF)'],
+  ['Trust deed', 'Scanned · original with accountant'],
+  ['Death benefit nomination', 'Renew by 3 Mar 2027', true],
+  ['Accountant', 'R. Patel, Patel Advisory'],
+  ['Handover to', 'David Ellis, Sarah Ellis'],
+];
+---
+<MockWindow class={extra} title="Estate record · Margaret Ellis" summary="Illustration of an estate record listing the will, super fund, trust deed, a death benefit nomination due for renewal, the accountant and two people the record will be handed to.">
+  <dl class="m-0">
+    {rows.map(([label, value, chip], i) => (
+      <div class={`flex flex-col gap-0.5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4 py-2 ${i > 0 ? 'border-t border-line' : ''}`}>
+        <dt class="text-ink-3 shrink-0">{label}</dt>
+        <dd class="m-0 sm:text-right">
+          {chip ? <span class="tag tag-ochre">{value}</span> : value}
+        </dd>
+      </div>
+    ))}
+  </dl>
+  <p class="mt-2 pt-2.5 border-t border-line flex items-center gap-2 text-ink-3">
+    <span class="w-2 h-2 rounded-full bg-green shrink-0"></span>Last reviewed 2 weeks ago
+  </p>
+</MockWindow>

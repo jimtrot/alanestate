@@ -1,0 +1,27 @@
+---
+import Base from '../layouts/Base.astro';
+import GuideList from '../components/GuideList.astro';
+---
+<Base title="Guides" description="Plain-English guides to what happens after a death in Australia, in the order things usually happen. Each one links to the official sources.">
+  <section class="container-x pt-16 pb-10 md:pt-24 md:pb-12">
+    <div class="max-w-3xl">
+      <p class="eyebrow mb-5">Guides</p>
+      <h1>Guides to administering an estate in Australia</h1>
+      <p class="lede mt-6">Plain-English guides to what happens after a death, in the order things usually happen. Each one links to the official sources.</p>
+    </div>
+  </section>
+
+  <section class="container-x pb-16">
+    <GuideList />
+  </section>
+
+  <section class="container-x pb-16 md:pb-20">
+    <div class="card-paper flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5">
+      <div class="max-w-xl">
+        <h3 class="text-[1.25rem]">Want it as a checklist?</h3>
+        <p class="mt-1 text-ink-2">Build your plan and get these steps sequenced for your state and situation.</p>
+      </div>
+      <a href="/guide/" class="btn btn-primary shrink-0">Build your plan</a>
+    </div>
+  </section>
+</Base>

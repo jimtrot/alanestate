@@ -1,0 +1,16 @@
+---
+/**
+ * Shared spam guards and no-JS notice, placed inside every form.
+ * The endpoint is not in the HTML: scripts/forms.ts posts via fetch.
+ */
+interface Props {
+  id: string;
+}
+const { id } = Astro.props;
+---
+<input type="text" name="_honey" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+<div aria-hidden="true" style="position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden">
+  <label for={`${id}-website`}>Website</label>
+  <input type="text" id={`${id}-website`} name="website" tabindex="-1" autocomplete="off" />
+</div>
+<noscript><p class="note">Please turn on JavaScript to send this form, or email us.</p></noscript>

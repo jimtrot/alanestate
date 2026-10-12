@@ -1,12 +1,14 @@
 ---
 const path = Astro.url.pathname;
 const nav = [
-  { href: '/guide/', label: 'The guide' },
-  { href: '/families/', label: 'For families' },
+  { href: '/guides/', label: 'Guides' },
   { href: '/professionals/', label: 'For professionals' },
   { href: '/about/', label: 'About' },
 ];
-const isActive = (href: string) => path === href || (href !== '/' && path.startsWith(href));
+const isActive = (href: string) =>
+  href === '/guides/'
+    ? path.startsWith('/guides/') || (path.startsWith('/guide/') && path !== '/guide/')
+    : path === href || (href !== '/' && path.startsWith(href));
 import Logo from './Logo.astro';
 ---
 <header class="border-b border-line bg-paper/95 backdrop-blur-sm sticky top-0 z-40">
@@ -18,7 +20,7 @@ import Logo from './Logo.astro';
       ))}
     </nav>
     <div class="flex items-center gap-2">
-      <a href="/guide/" class="btn btn-primary btn-sm hidden sm:inline-flex">Get your plan</a>
+      <a href="/guide/" class="btn btn-primary btn-sm hidden sm:inline-flex">Build your plan</a>
       <button type="button" class="md:hidden btn btn-secondary btn-sm px-3" aria-expanded="false" aria-controls="mobile-nav" id="nav-toggle">
         <span class="sr-only">Menu</span>
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
@@ -30,7 +32,7 @@ import Logo from './Logo.astro';
       {nav.map((n) => (
         <a href={n.href} class="py-3 no-underline border-b border-line last:border-0 text-ink-2 hover:text-green" aria-current={isActive(n.href) ? 'page' : undefined}>{n.label}</a>
       ))}
-      <a href="/guide/" class="btn btn-primary mt-3">Get your plan</a>
+      <a href="/guide/" class="btn btn-primary mt-3">Build your plan</a>
     </nav>
   </div>
 </header>

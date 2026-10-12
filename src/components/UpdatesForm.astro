@@ -1,0 +1,67 @@
+---
+/**
+ * Updates sign-up. Posts via scripts/forms.ts (no endpoint in the HTML).
+ */
+import FormGuards from './FormGuards.astro';
+
+interface Props {
+  id?: string;
+  heading?: string;
+  intro?: string;
+  compact?: boolean;
+  /** Where the form sits, sent as a hidden field, e.g. "home" or "plan" */
+  source?: string;
+}
+const { id = 'updates', heading, intro, compact = false, source = 'home' } = Astro.props;
+---
+<div id={id} class="scroll-mt-24">
+  {heading && <h2 class={compact ? 'text-[1.5rem] mb-2' : 'mb-2'}>{heading}</h2>}
+  {intro && <p class="text-ink-2 mb-6 max-w-prose">{intro}</p>}
+  <form class="ae-form card grid gap-5" method="POST" novalidate>
+    <input type="hidden" name="_subject" value="Alan Estate: updates sign-up" />
+    <input type="hidden" name="_template" value="table" />
+    <input type="hidden" name="_captcha" value="false" />
+    <input type="hidden" name="segment" value="updates" />
+    <input type="hidden" name="source" value={source} />
+    <input type="hidden" name="page" value={Astro.url.pathname} />
+    <input type="hidden" name="referrer" value="" data-fill="referrer" />
+    <input type="hidden" name="utm" value="" data-fill="utm" />
+    <FormGuards id={id} />
+
+    <div class={`grid gap-5 ${compact ? '' : 'sm:grid-cols-2'}`}>
+      <div class="field">
+        <label class="label" for={`${id}-email`}>Email</label>
+        <input class="input" id={`${id}-email`} name="email" type="email" autocomplete="email" inputmode="email" required />
+        <p class="error-text" data-error hidden>Please enter a valid email address so we can reach you.</p>
+      </div>
+      <div class="field">
+        <label class="label" for={`${id}-role`}>I'm… <span class="text-ink-3 font-normal">(optional)</span></label>
+        <select class="select" id={`${id}-role`} name="role">
+          <option value="">Choose…</option>
+          <option>Planning my own estate</option>
+          <option>Helping a parent or partner</option>
+          <option>Administering an estate now</option>
+          <option>A professional</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+      <button type="submit" class="btn btn-primary" data-submit>
+        <span data-label>Keep me updated</span>
+      </button>
+      <p class="text-sm text-ink-3" data-consent>Occasional emails about Alan Estate. Unsubscribe at any time. <a href="/privacy/" class="underline">Privacy</a>.</p>
+    </div>
+    <div class="note note-green" data-success hidden role="status" aria-live="polite" tabindex="-1">
+      <p class="font-semibold">Thanks. We'll be in touch when there's news.</p>
+    </div>
+    <div class="note" style="border-left-color: var(--color-error)" data-failure hidden role="alert">
+      <p class="font-semibold">That didn't go through.</p>
+      <p class="text-ink-2 mt-1">Please try again in a moment, or use the <a class="underline" href="/contact/">contact page</a>.</p>
+    </div>
+  </form>
+</div>
+<script>
+  import { enhanceForms } from '../scripts/forms';
+  enhanceForms();
+</script>

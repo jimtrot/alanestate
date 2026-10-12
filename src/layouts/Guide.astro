@@ -34,7 +34,7 @@ const path = Astro.url.pathname;
 <Base title={title} description={description} ogType="article" jsonLd={jsonLd}>
   <div class="container-x py-10 md:py-14">
     <nav aria-label="Breadcrumb" class="text-sm text-ink-3 mb-8">
-      <a href="/guide/" class="no-underline hover:text-green">The guide</a> <span aria-hidden="true">/</span> <span class="text-ink-2">{title}</span>
+      <a href="/guides/" class="no-underline hover:text-green">Guides</a> <span aria-hidden="true">/</span> <span class="text-ink-2">{title}</span>
     </nav>
     <div class="grid gap-12 lg:grid-cols-[1fr_16rem] lg:gap-16">
       <div>
@@ -61,11 +61,11 @@ const path = Astro.url.pathname;
       <aside class="lg:sticky lg:top-24 lg:self-start no-print">
         <div class="card-paper">
           <p class="eyebrow mb-3">Build your own plan</p>
-          <p class="text-[0.95rem] text-ink-2">Six questions gives you a sequenced checklist for your state and situation, with only the steps that apply to you.</p>
-          <a href="/guide/" class="btn btn-primary btn-sm mt-4 w-full">Start the plan</a>
+          <p class="text-[0.95rem] text-ink-2">Six questions give you a sequenced checklist for your state and situation, with only the steps that apply to you.</p>
+          <a href="/guide/" class="btn btn-primary btn-sm mt-4 w-full">Build your plan</a>
         </div>
-        <nav aria-label="Guide sections" class="mt-6">
-          <p class="eyebrow mb-3">In this guide</p>
+        <nav aria-label="Guides" class="mt-6">
+          <p class="eyebrow mb-3">All guides</p>
           <ul class="space-y-1 text-[0.95rem]">
             {nav.map((n) => (
               <li>
